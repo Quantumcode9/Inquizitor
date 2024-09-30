@@ -1,0 +1,100 @@
+
+     [
+      {
+        "id": "q1",
+        "question": "How do you recharge your energy after a long day?",
+        "options": [
+          { "id": "a", "text": "Being around others" },
+          { "id": "b", "text": "Spending time alone" }
+        ]
+      },
+      {
+        "id": "q2",
+        "question": "Do you prefer to stick to plans or adapt as you go?",
+        "options": [
+          { "id": "a", "text": "Stick to plans" },
+          { "id": "b", "text": "Adapt as you go" }
+        ]
+      },
+      {
+        "id": "q3",
+        "question": "Do you focus more on details or the big picture when approaching a problem?",
+        "options": [
+          { "id": "a", "text": "Details" },
+          { "id": "b", "text": "Big picture" }
+        ]
+      },
+      {
+        "id": "q4",
+        "question": "Do you find it easy to strike up conversations with strangers?",
+        "options": [
+          { "id": "a", "text": "Yes, I enjoy it" },
+          { "id": "b", "text": "No, I feel uncomfortable" }
+        ]
+      },
+      {
+        "id": "q5",
+        "question": "When resolving disputes, do you prioritize logic or people's feelings?",
+        "options": [
+          { "id": "a", "text": "Logic" },
+          { "id": "b", "text": "People's feelings" }
+        ]
+      },
+      {
+        "id": "q6",
+        "question": "Do you tend to complete tasks well ahead of deadlines or wait until the last minute?",
+        "options": [
+          { "id": "a", "text": "Ahead of time" },
+          { "id": "b", "text": "Last minute" }
+        ]
+      },
+      {
+        "id": "q7",
+        "question": "How do you typically spend your weekends?",
+        "options": [
+          { "id": "a", "text": "At home watching TV or writing" },
+          { "id": "b", "text": "Out socializing with friends" }
+        ]
+      },
+      {
+        "id": "q8",
+        "question": "When faced with a tough decision, do you rely more on logic or your gut feelings?",
+        "options": [
+          { "id": "a", "text": "Gut feeling" },
+          { "id": "b", "text": "Logic" }
+        ]
+      },
+      {
+        "id": "q9",
+        "question": "Do you prefer structured activities or spontaneous plans for your weekend?",
+        "options": [
+          { "id": "a", "text": "Structured activities" },
+          { "id": "b", "text": "Spontaneous plans" }
+        ]
+      },
+      {
+        "id": "q10",
+        "question": "Do you focus on concrete facts or abstract ideas?",
+        "options": [
+          { "id": "a", "text": "Concrete facts" },
+          { "id": "b", "text": "Abstract ideas" }
+        ]
+      },
+      {
+        "id": "q11",
+        "question": "Do you find it easier to make decisions based on fairness or empathy?",
+        "options": [
+          { "id": "a", "text": "Fairness" },
+          { "id": "b", "text": "Empathy" }
+        ]
+      },
+      {
+        "id": "q12",
+        "question": "Do you tend to think more about the present or the future?",
+        "options": [
+          { "id": "a", "text": "Present" },
+          { "id": "b", "text": "Future" }
+        ]
+      }
+    ]
+  
