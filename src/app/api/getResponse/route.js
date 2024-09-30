@@ -1,4 +1,4 @@
-// app/api/getPersonalityType/route.js
+// app/api/getResponse/route.js
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
@@ -6,75 +6,129 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Static list of questions to be matched with answers (same as your questions.json)
-const questions = [
-  "How do you recharge your energy after a long day?",
-  "Do you prefer to stick to plans or adapt as you go?",
-  "Do you focus more on details or the big picture when approaching a problem?",
-  "Do you find it easy to strike up conversations with strangers?",
-  "When resolving disputes, do you prioritize logic or people's feelings?",
-  "Do you tend to complete tasks well ahead of deadlines or wait until the last minute?",
-  "How do you typically spend your weekends?",
-  "When faced with a tough decision, do you rely more on logic or your gut feelings?",
-  "Do you prefer structured activities or spontaneous plans for your weekend?",
-  "Do you focus on concrete facts or abstract ideas?",
-  "Do you find it easier to make decisions based on fairness or empathy?",
-  "Do you tend to think more about the present or the future?",
-];
+// Generate random personality questions
+async function generatePersonalityQuestions() {
+  const prompt = `
+  Generate exactly 5 personality-related questions, each with two distinct options labeled as a) and b). Return each question and its options in a clear bullet-point format, like this:
+
+  - How do you recharge your energy after a long day?
+    a) Spending time alone
+    b) Socializing with friends
+  - How do you prefer to spend your weekends?
+    a) At home relaxing
+    b) Going out with friends
+  `;
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      { role: 'system', content: 'You are a personality quiz generator.' },
+      { role: 'user', content: prompt }
+    ],
+    temperature: 0.7,
+    max_tokens: 500,
+  });
+
+  if (!response || !response.choices || response.choices.length === 0) {
+    throw new Error('Failed to generate personality questions');
+  }
+
+  const questionsRaw = response.choices[0].message.content;
+
+  // Parse the response into structured questions with options
+  const questionsArray = questionsRaw
+    .split('\n- ')  // Split by bullet points (assuming OpenAI uses this format)
+    .filter(Boolean) // Remove any empty values
+    .map((questionText) => {
+      const [questionPart, ...optionParts] = questionText.split('\n').map(line => line.trim());
+      
+      // Extract options assuming OpenAI follows the a) and b) format
+      const [optionA, optionB] = optionParts.length > 1 
+        ? optionParts.map(opt => opt.replace(/^([a-b])\)/, '').trim()) 
+        : ['Option A undefined', 'Option B undefined'];
+
+      return {
+        question: questionPart || 'Question undefined',
+        optionA,
+        optionB,
+      };
+    });
+
+  return questionsArray; // Return structured questions with options
+}
 
 export async function POST(request) {
   try {
-    const { answers } = await request.json();
+    const { action, answers } = await request.json();
 
-    // Ensure answers are received and the length matches the questions
-    if (!answers || answers.length !== questions.length) {
-      return NextResponse.json({ error: 'Answers do not match the number of questions' }, { status: 400 });
+    if (action === 'generate') {
+      // Step 1: Generate random questions
+      const questions = await generatePersonalityQuestions();
+      return NextResponse.json({ questions });
+
+    } else if (action === 'analyze') {
+      // Step 2: Analyze answers (stubbed, replace with your actual logic)
+      let formattedQA = '';
+      for (let i = 0; i < answers.length; i++) {
+        formattedQA += `${i + 1}. Answer: ${answers[i]}\n\n`;
+      }
+
+      const prompt = `
+      You are an advanced AI. Based on the user's answers to personality questions, give the user a personality type based on Myers & Briggs theory.
+      
+      Answers:
+      ${formattedQA}
+
+      Analyze the user's personality based on these answers. Provide a one sentence explanation of their traits. At the end of your analysis, ask the user if they would like a guess of their zodiac sign.
+      `;
+
+      const response = await openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: 'You are an advanced personality analyzer.' },
+          { role: 'user', content: prompt },
+        ],
+        temperature: 0.7,
+        max_tokens: 400,
+      });
+
+      if (!response || !response.choices || response.choices.length === 0) {
+        throw new Error('Failed to analyze answers');
+      }
+
+      const analysis = response.choices[0].message.content;
+      return NextResponse.json({ analysis });
+
+    } else if (action === 'zodiac') {
+      // Step 3: Provide zodiac sign based on analysis (stubbed)
+      const zodiacPrompt = `
+      Based on the user's personality traits, make an educated guess about their zodiac sign.
+      `;
+
+      const zodiacResponse = await openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: 'You are a zodiac sign guesser.' },
+          { role: 'user', content: zodiacPrompt },
+        ],
+        temperature: 0.7,
+        max_tokens: 100,
+      });
+
+      if (!zodiacResponse || !zodiacResponse.choices || zodiacResponse.choices.length === 0) {
+        throw new Error('Failed to guess zodiac sign');
+      }
+
+      const zodiac = zodiacResponse.choices[0].message.content;
+      return NextResponse.json({ zodiac });
+
+    } else {
+      // If the action is not recognized, return an error
+      return NextResponse.json({ error: 'Invalid action provided' }, { status: 400 });
     }
 
-     // Construct the prompt by pairing static questions with received answers
-     let formattedQA = '';
-     for (let i = 0; i < questions.length; i++) {
-       formattedQA += `${i + 1}. ${questions[i]}\n Answer: ${answers[i]}\n\n`;
-     }
- 
-     const prompt = `
-     You are a highly advanced personality analysis AI. Based on the user's answers, analyze their personality type.
- 
-     Answers:
-     ${formattedQA}
- 
-     Based on these answers, give the personality type of the user. Provide an brief explanation and reasoning behind the placement.
- 
-     At the end of the response, ask the user if they'd like a guess of their zodiac sign based on this analysis.
-     `;
- 
-     // Send the request to OpenAI
-     const response = await openai.chat.completions.create({
-       model: 'gpt-4o-mini',
-       messages: [
-         {
-           role: 'system',
-           content: 'You are an advanced personality analysis AI.',
-         },
-         {
-           role: 'user',
-           content: prompt,
-         },
-       ],
-       temperature: 0.7,
-       max_tokens: 500,
-     });
- 
-     const choices = response.choices;
-     if (!choices || choices.length === 0) {
-       throw new Error('No choices returned from OpenAI API');
-     }
- 
-     // Respond with the analysis returned from OpenAI
-     return NextResponse.json({ personalityAnalysis: choices[0].message.content });
-     
-   } catch (error) {
-     console.error(error);
-     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
-   }
- }
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
