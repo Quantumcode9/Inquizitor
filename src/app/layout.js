@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       >
           <header className="flex justify-between text-center text-white p-4 bg-[#01949A] dark:bg-[#1E1E1E] shadow-md dark:shadow-none">
         <h1 className="text-3xl font-bold text-center">
-          IntelliQuizz
+        Inquizitor
         </h1>
         <DarkModeToggle />
       </header>

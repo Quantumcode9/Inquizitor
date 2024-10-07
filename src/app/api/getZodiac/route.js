@@ -66,7 +66,6 @@ if (action === 'generate') {
     return NextResponse.json({ questions });
 
 } else if (action === 'analyze') {
-    // pass answers to GPT for zodiac analysis
     const prompt = `
     Based on the user's responses, guess their zodiac sign. Here are their answers:
 

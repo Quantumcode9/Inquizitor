@@ -28,7 +28,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="p-4 text-center text-gray-600 dark:text-gray-400">
-        © 2024 IntelliQuizz
+        © 2024 Inquizitor
       </footer>
     </div>
   );
