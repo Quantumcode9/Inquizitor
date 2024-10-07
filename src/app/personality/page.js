@@ -1,14 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Questionnaire() {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [analysis, setAnalysis] = useState('');
-  const [zodiacPrompt, setZodiacPrompt] = useState(false);
+  const [feedbackPrompt, setFeedbackPrompt] = useState(false);
+  const router = useRouter();
 
-  // Fetch AI-generated questions when component loads
   useEffect(() => {
     const fetchQuestions = async () => {
       const response = await fetch('/api/getResponse', {
@@ -18,7 +19,7 @@ export default function Questionnaire() {
       });
 
       const data = await response.json();
-      setQuestions(data.questions); // Assuming the questions are structured properly
+      setQuestions(data.questions); 
     };
 
     fetchQuestions();
@@ -40,71 +41,108 @@ export default function Questionnaire() {
 
     const data = await response.json();
     setAnalysis(data.analysis);
-    setZodiacPrompt(true); // Show zodiac option
+    setFeedbackPrompt(true); 
   };
 
-  const handleZodiac = async (choice) => {
-    if (choice === 'yes') {
-      const response = await fetch('//api/getResponse', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'zodiac' })
-      });
+  const handleFeedback = async (choice) => {
+    const feedback = {
+      analysis,
+      correct: choice === 'yes',
+      timestamp: new Date().toISOString()
+    };
 
-      const data = await response.json();
-      alert('Your zodiac sign is: ' + data.zodiac);
+    const response = await fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(feedback)
+    });
+
+    if (response.ok) {
+      alert('Thank you for your feedback!');
+      router.push('/'); 
     } else {
-      alert('Thank you for completing the questionnaire!');
+      alert('There was an error submitting your feedback.');
+      router.push('/'); 
+
     }
   };
 
   return (
-    <div>
-      <h2>Personality Questionnaire</h2>
+    <div className="p-6 bg-cardBackground rounded-lg shadow-md max-w-[50rem] mx-auto mt-10">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Personality Questionnaire</h2>
 
       {!analysis && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="space-y-8">
           {questions.map((question, index) => (
-            <div key={index}>
-              <label>{question.question}</label>
-              <div>
-                <input
-                  type="radio"
-                  id={`question-${index}-a`}
-                  name={`question-${index}`}
-                  value={question.optionA}
-                  onChange={handleChange}
-                />
-                <label htmlFor={`question-${index}-a`}>
-                  {`Option A: ${question.optionA}`}
+            <div key={index} className="space-y-4">
+              {/* Question */}
+              <label className="block text-lg font-semibold text-gray-900 dark:text-gray-100">
+                {question.question}
+              </label>
+
+              {/* Options */}
+              <div className="space-y-2">
+                {/* option A */}
+                <label htmlFor={`question-${index}-a`} className="flex items-center text-center p-4 bg-gray-100 dark:bg-[#333] rounded-lg cursor-pointer hover:bg-primary hover:text-white dark:hover:bg-darkPrimary dark:hover:text-gray-100 transition-colors duration-200">
+                  <input
+                    type="radio"
+                    id={`question-${index}-a`}
+                    name={`question-${index}`}
+                    value={question.optionA}
+                    onChange={handleChange}
+                    className="mr-3"
+                  />
+                  <span>{`${question.optionA}`}</span>
+                </label>
+
+                {/* option B */}
+                <label htmlFor={`question-${index}-b`} className="flex items-center p-4 bg-gray-100 dark:bg-[#333] rounded-lg cursor-pointer hover:bg-primary hover:text-white dark:hover:bg-darkPrimary dark:hover:text-gray-100 transition-colors duration-200">
+                  <input
+                    type="radio"
+                    id={`question-${index}-b`}
+                    name={`question-${index}`}
+                    value={question.optionB}
+                    onChange={handleChange}
+                    className="mr-3"
+                  />
+                  <span>{`${question.optionB}`}</span>
                 </label>
               </div>
-              <div>
-                <input
-                  type="radio"
-                  id={`question-${index}-b`}
-                  name={`question-${index}`}
-                  value={question.optionB}
-                  onChange={handleChange}
-                />
-                <label htmlFor={`question-${index}-b`}>
-                  {`Option B: ${question.optionB}`}
-                </label>
-              </div>
-              <br />
+
+              {/* Divider */}
+              <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
             </div>
           ))}
-          <button type="submit">Submit</button>
+
+          <button type="submit" className="mt-4 px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:hover:bg-blue-800 transition-colors duration-200">
+            Submit
+          </button>
         </form>
       )}
 
-      {analysis && <div><p>{analysis}</p></div>}
+      {analysis && (
+        <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">
+          <p className="whitespace-pre-line">{analysis}</p>
+        </div>
+      )}
 
-      {zodiacPrompt && (
-        <div>
-          <p>Would you like us to guess your zodiac sign based on the analysis?</p>
-          <button onClick={() => handleZodiac('yes')}>Yes please</button>
-          <button onClick={() => handleZodiac('no')}>No thanks</button>
+      {feedbackPrompt && (
+        <div className="mt-4">
+          <p className="text-gray-800 dark:text-gray-300">Do you agree with the analysis?</p>
+          <div className="space-x-2 mt-2">
+            <button
+              onClick={() => handleFeedback('yes')}
+              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 dark:bg-green-700 dark:hover:bg-green-800"
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => handleFeedback('no')}
+              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 dark:bg-red-700 dark:hover:bg-red-800"
+            >
+              No
+            </button>
+          </div>
         </div>
       )}
     </div>

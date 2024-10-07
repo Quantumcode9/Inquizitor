@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
+const nextConfig = {
+    reactStrictMode: process.env.NODE_ENV !== 'development',
+  };
+  
+  export default nextConfig;

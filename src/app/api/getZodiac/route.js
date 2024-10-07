@@ -1,4 +1,3 @@
-// app/api/getZodiacQuestions/route.js
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
@@ -6,7 +5,7 @@ const openai = new OpenAI({
 apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Generate zodiac-related questions based on personality traits
+// generate questions 
 async function generateZodiacQuestions() {
 const prompt = `
 Generate 4 personality-related questions that help determine a person's zodiac sign. Each question should have four distinct options. Return the questions like this:
@@ -40,12 +39,12 @@ throw new Error('Failed to generate zodiac questions');
 
 const questionsRaw = response.choices[0].message.content;
 
-// parse the response into structured questions with four options
+// parse the response into questions with four options
 const questionsArray = questionsRaw
-.split('\n- ')  // split by bullet points
-.filter(Boolean) // filter out empty strings
+.split('\n- ')  
+.filter(Boolean) 
 .map((questionText) => {
-    const [questionPart, ...optionsPart] = questionText.split('\n').map(line => line.trim()).filter(Boolean); // Filter out empty lines here too
+    const [questionPart, ...optionsPart] = questionText.split('\n').map(line => line.trim()).filter(Boolean); 
     
     return {
     question: questionPart || 'Question undefined',
@@ -62,18 +61,21 @@ try {
 const { action, answers } = await request.json();
 
 if (action === 'generate') {
-    // Generate zodiac-related questions
+    // generate zodiac-related questions
     const questions = await generateZodiacQuestions();
     return NextResponse.json({ questions });
 
 } else if (action === 'analyze') {
-    // Directly pass answers to GPT for zodiac analysis
+    // pass answers to GPT for zodiac analysis
     const prompt = `
     Based on the user's responses, guess their zodiac sign. Here are their answers:
 
     ${answers.join('\n')}
     
-    Based on these responses, what is the most likely zodiac sign for this person?
+    Based on these responses, what is the most likely zodiac sign for this person? Answer with the zodiac sign like follows:
+    "The most likely zodiac sign is: [zodiac sign]". 
+    Then provide a brief explanation of why you think this zodiac sign fits the user's personality.
+  
     `;
 
     const response = await openai.chat.completions.create({

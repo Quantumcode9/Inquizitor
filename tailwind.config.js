@@ -8,10 +8,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: "var(--primary-color)",
         background: "var(--background)",
-        foreground: "var(--foreground)",
+        cardBackground: "var(--card-background)",
+        text: "var(--text-color)",
+        secondaryText: "var(--secondary-text-color)",
+        accent: "var(--accent-color)",
+        error: "var(--error-color)",
+        darkPrimary: '#01949A', 
       },
     },
   },
   plugins: [],
+  darkMode: 'class',
 };
