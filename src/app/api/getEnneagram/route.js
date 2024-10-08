@@ -5,25 +5,12 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// cache
-let cachedStatements = null;
-let cacheTimestamp = null;
-const CACHE_DURATION = 60 * 1000; 
-
-
-// Generate Enneagram personality statements
 async function generateEnneagramStatements() {
-
-  if (cachedStatements && Date.now() - cacheTimestamp < CACHE_DURATION) {
-    console.log('Using cached statements.');
-    return cachedStatements;
-  }
-
   const prompt = `
-Generate exactly 10 Enneagram personality statements that can be answered on a Likert scale from 1 to 5 (1: Strongly Disagree, 5: Strongly Agree). Each statement should reflect characteristics of one specific Enneagram type. For each statement, include the Enneagram type number at the beginning, like this:
+Generate exactly 10 Enneagram personality statements that can be answered on a Likert scale from 1 to 5 (1: Strongly Disagree, 5: Strongly Agree). Just provide 10 clear statements. Here are some examples:
 
-Type 1: I strive for perfection in everything I do.
-Type 2: I am driven by the need to help others.
+1. I strive for perfection in everything I do.
+2. I am driven by the need to help others.
 `;
 
   let response;
@@ -43,35 +30,25 @@ Type 2: I am driven by the need to help others.
   }
 
   const statementsRaw = response.choices[0].message.content;
+  console.log('OpenAI response:', statementsRaw); // For debugging
 
+  // Split the response into individual statements
   const statementsArray = statementsRaw
     .split('\n')
-    .filter(Boolean)
-    .map((line) => {
-      const match = line.trim().match(/^Type\s*(\d+):\s*(.+)$/);
-      if (match) {
-        return {
-          type: parseInt(match[1], 10),
-          statement: match[2],
-        };
-      }
-      console.warn(`Line did not match expected pattern: ${line}`);
-      return null;
-    })
-    .filter(Boolean);
-  
-  if (statementsArray.length === 0) {
-    throw new Error('Failed to generate Enneagram statements: No valid statements found');
+    .map((line) => line.trim()) // Remove extra whitespace
+    .filter(Boolean); // Filter out any empty lines
+
+  // Check to ensure 10 statements were generated
+  if (statementsArray.length < 10) {
+    console.error('Parsing failed. Not enough statements generated.');
+    throw new Error('Not enough statements generated');
   }
-  
-  cachedStatements = statementsArray;
-  cacheTimestamp = Date.now();
-  
-  return statementsArray;
+
+  return statementsArray.slice(0, 10); // Return the first 10 statements
 }
 
 async function analyzeAnswers(answers) {
-  // Format answers for the prompt
+  // format answers for the prompt
   const formattedAnswers = answers
     .map((answerObj, index) => `Type ${answerObj.type}: ${answerObj.answer}`)
     .join('\n');
@@ -87,9 +64,9 @@ Based on these responses, identify the user's main Enneagram type and their wing
 
 Your response should be structured as follows:
 
-"You are a Type <number>: <Type Name>."
-"You have a wing of <number>: <Type Name>."
-"This makes you a <Full Type (e.g., 3w4)> <Type Name>."
+"You are a Type <number>: <Type Name>"
+"You have a wing of <number>: <Type Name>"
+"This makes you a <Full Type (e.g., 3w4)>"
 
 2-3 sentence analysis:
 [Provide a brief analysis here.]
@@ -113,7 +90,7 @@ Ensure that the analysis is concise and reflects the user's answers accurately.
 
   const analysis = response.choices[0].message.content;
 
-  // Split the analysis into sentences
+  // split the analysis into sentences
   const sentences = analysis.match(/[^.!?]+[.!?]+/g) || [];
   const formattedAnalysis = sentences.slice(0, 3).join('.\n') + (sentences.length > 3 ? '.\n' + sentences.slice(3).join(' ') : '');
 
@@ -123,38 +100,18 @@ Ensure that the analysis is concise and reflects the user's answers accurately.
 // POST handler
 export async function POST(request) {
   try {
-    let body;
-    try {
-      body = await request.json();
-    } catch (parseError) {
-      console.error('Error parsing JSON:', parseError);
-      return NextResponse.json({ error: 'Invalid JSON in request body' }, { status: 400 });
-    }
+    const body = await request.json();
+    console.log('Request body:', body); // log the request body
 
     const { action, answers } = body;
 
-    if (!action) {
-      console.error('Action is undefined');
-      return NextResponse.json({ error: 'Action is required' }, { status: 400 });
-    }
-
     if (action === 'generate') {
-      // Generate statements
       const statements = await generateEnneagramStatements();
-      if (!statements || statements.length === 0) {
-        throw new Error('Failed to generate statements');
-      }
       return NextResponse.json({ statements });
     } else if (action === 'analyze') {
-      if (!answers) {
-        console.error('Answers are undefined');
-        return NextResponse.json({ error: 'Answers are required for analysis' }, { status: 400 });
-      }
-      // Analyze answers
       const analysis = await analyzeAnswers(answers);
       return NextResponse.json({ analysis });
     } else {
-      console.warn('Invalid action:', action);
       return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }
   } catch (error) {

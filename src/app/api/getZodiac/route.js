@@ -8,15 +8,15 @@ apiKey: process.env.OPENAI_API_KEY,
 // generate questions 
 async function generateZodiacQuestions() {
 const prompt = `
-Generate 4 personality-related questions that help determine a person's zodiac sign. Each question should have four distinct options. Return the questions like this:
+Generate 7 personality-related questions that help determine a person's zodiac sign. Each question should have four distinct options. Return the questions like this:
 
-- How do you react when faced with a big decision?
+1. How do you react when faced with a big decision?
 a) I analyze every detail before making a choice.
 b) I go with my gut feeling.
 c) I take quick, bold action.
 d) I consult others to get feedback.
 
-- How would you describe your social life?
+2. How would you describe your social life?
 a) I love being the center of attention at big gatherings.
 b) I prefer small, intimate settings with close friends.
 c) I enjoy socializing but need alone time to recharge.
@@ -30,7 +30,7 @@ messages: [
     { role: 'user', content: prompt },
 ],
 temperature: 0.7,
-max_tokens: 500,
+max_tokens: 700,
 });
 
 if (!response || !response.choices || response.choices.length === 0) {
@@ -41,7 +41,7 @@ const questionsRaw = response.choices[0].message.content;
 
 // parse the response into questions with four options
 const questionsArray = questionsRaw
-.split('\n- ')  
+.split(/\n(?=\d+\.\s)/) 
 .filter(Boolean) 
 .map((questionText) => {
     const [questionPart, ...optionsPart] = questionText.split('\n').map(line => line.trim()).filter(Boolean); 
@@ -51,7 +51,7 @@ const questionsArray = questionsRaw
     options: optionsPart.map(opt => opt.replace(/^[a-d]\)\s*/, '').trim()),
     };
 })
-.slice(0, 4); //4 questions
+.slice(0, 7); // 7 question
 
 return questionsArray; // 4 options
 }
@@ -84,7 +84,7 @@ if (action === 'generate') {
         { role: 'user', content: prompt },
     ],
     temperature: 0.7,
-    max_tokens: 150,
+    max_tokens: 250,
     });
 
     if (!response || !response.choices || response.choices.length === 0) {

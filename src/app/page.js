@@ -5,8 +5,8 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-background text-gray-900 dark:text-gray-100">
   <main className="p-4">
         <p className="text-lg text-text-color mb-4">
-          Select one of the quizzes below:
-        </p>
+          Select one of the quizzes below
+        </p><hr className="border-t border-gray-600 dark:border-gray-600 my-4" />
         <ul className="space-y-4">
           <li>
             <Link href="/personality" className="block p-4 text-xl font-semibold text-gray-800 bg-cardBackground rounded-lg shadow-md dark:text-gray-300 dark:shadow-none hover:bg-primary hover:text-white dark:hover:bg-darkPrimary">
