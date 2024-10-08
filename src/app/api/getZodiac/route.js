@@ -8,7 +8,8 @@ apiKey: process.env.OPENAI_API_KEY,
 // generate questions 
 async function generateZodiacQuestions() {
 const prompt = `
-Generate 7 personality-related questions that help determine a person's zodiac sign. Each question should have four distinct options. Return the questions like this:
+Generate 7 personality-related questions that help determine a person's zodiac sign. 
+Each question should have four distinct options. Return the questions like this:
 
 1. How do you react when faced with a big decision?
 a) I analyze every detail before making a choice.
@@ -57,8 +58,8 @@ return questionsArray; // 4 options
 }
 
 export async function POST(request) {
-try {
-const { action, answers } = await request.json();
+    try {
+      const { action, questionAnswers } = await request.json();
 
 if (action === 'generate') {
     // generate zodiac-related questions
@@ -66,38 +67,48 @@ if (action === 'generate') {
     return NextResponse.json({ questions });
 
 } else if (action === 'analyze') {
-    const prompt = `
-    Based on the user's responses, guess their zodiac sign. Here are their answers:
+    const responsesText = questionAnswers
+    .map(
+      (qa, idx) => `Q${idx + 1}: ${qa.question}\nA${idx + 1}: ${qa.answer}`
+    )
+    .join('\n\n');
 
-    ${answers.join('\n')}
-    
-    Based on these responses, what is the most likely zodiac sign for this person? Answer with the zodiac sign like follows:
-    "The most likely zodiac sign is: [zodiac sign]". 
-    Then provide a brief explanation of why you think this zodiac sign fits the user's personality.
-  
-    `;
+  const prompt = `
+Based on the user's responses, analyze their personality traits and determine their most likely zodiac sign. 
+Here are the questions and responses:
 
-    const response = await openai.chat.completions.create({
+${responsesText}
+
+Using all of these responses, identify the zodiac sign that best matches the traits. 
+Respond with the zodiac sign in the following format:
+"The most likely zodiac sign is: [zodiac sign]."
+
+Provide a brief explanation of how the traits from the user's responses align with the characteristics of this zodiac sign.
+`;
+
+  const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
     messages: [
-        { role: 'system', content: 'You are an expert at identifying zodiac signs based on personality traits.' },
-        { role: 'user', content: prompt },
+      {
+        role: 'system',
+        content:
+          'You are an expert at identifying zodiac signs based on personality traits.',
+      },
+      { role: 'user', content: prompt },
     ],
     temperature: 0.7,
     max_tokens: 250,
-    });
+  });
 
-    if (!response || !response.choices || response.choices.length === 0) {
+  if (!response || !response.choices || response.choices.length === 0) {
     throw new Error('Failed to guess zodiac sign');
-    }
+  }
 
-    const guessedZodiac = response.choices[0].message.content.trim();
-    return NextResponse.json({ guessedZodiac });
-
+  const guessedZodiac = response.choices[0].message.content.trim();
+  return NextResponse.json({ guessedZodiac });
 } else {
-    return NextResponse.json({ error: 'Invalid action provided' }, { status: 400 });
+  return NextResponse.json({ error: 'Invalid action provided' }, { status: 400 });
 }
-
 } catch (error) {
 console.error(error);
 return NextResponse.json({ error: error.message }, { status: 500 });
