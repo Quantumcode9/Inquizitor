@@ -16,6 +16,7 @@ module.exports = {
         accent: "var(--accent-color)",
         error: "var(--error-color)",
         darkPrimary: '#01949A', 
+        onBlue: "var(--on-blue)",
       },
     },
   },
