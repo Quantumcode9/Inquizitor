@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import questionsData from '../data/enneagramQuestions';
 
 export default function EnneagramQuiz() {
   const [statements, setStatements] = useState([]);
@@ -9,39 +10,33 @@ export default function EnneagramQuiz() {
   const [analysis, setAnalysis] = useState('');
   const [feedbackPrompt, setFeedbackPrompt] = useState(false);
   const [error, setError] = useState(null); 
+  const [stage, setStage] = useState(1); // 1 for first set, 2 for second set
   const router = useRouter();
 
+  //fisher-yates shuffle: a brand new dance 
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+      [array[i], array[j]] = [array[j], array[i]]; // swap elements
+    }
+    return array;
+  }
+
+
   useEffect(() => {
-    // Fetch statements when the component mounts
-    (async () => {
-      try {
-        const response = await fetch('/api/getEnneagram', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'generate' }),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch statements');
-        }
-
-        console.log('Fetched statements:', data.statements);
-
-        setStatements(data.statements);
-        setAnswers(
-          data.statements.map((statement) => ({
-            statement, 
-            answer: '', 
-          }))
-        );
-      } catch (err) {
-        console.error('Error fetching statements:', err);
-        setError(err.message);
-      }
-    })();
-  }, []); // empty dependency array to run once
+    // stage 1 the first 9 questions
+    if (stage === 1) {
+      const shuffledQuestions = shuffleArray([...questionsData]); 
+      setStatements(shuffledQuestions);
+      setAnswers(
+        shuffledQuestions.map((question) => ({
+          type: question.type, 
+          statement: question.statement,
+          answer: '', 
+        }))
+      );
+    }
+  }, [stage]);
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -53,68 +48,76 @@ export default function EnneagramQuiz() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // check to see if all statements are answered
+    // check if all questions are answered
     const allAnswered = answers.every((answerObj) => answerObj.answer !== '');
     if (!allAnswered) {
       alert('Please answer all statements before submitting.');
       return;
     }
 
-    const requestData = { action: 'analyze', answers };
+    if (stage === 1) {
+      // submit answers for first 9 questions
+      const requestData = { action: 'analyzeFirstSet', answers };
+      
+      try {
+        const response = await fetch('/api/getEnneagram', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestData),
+        });
 
-    try {
-      const response = await fetch('/api/getEnneagram', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestData),
-      });
+        const data = await response.json();
 
-      const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to analyze answers');
+        }
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to analyze answers');
+        // store the new questions in statements and move to stage 2
+        setStatements(data.newQuestions); //dynamically generated questions
+        setAnswers(
+          data.newQuestions.map((question) => ({
+            type: question.type, // new types based on narrowed analysis
+            statement: question.statement,
+            answer: '', 
+          }))
+        );
+        setStage(2); // move to the next stage
+
+      } catch (err) {
+        console.error('Error analyzing answers:', err);
+        setError(err.message);
       }
+    } else if (stage === 2) {
+      // submit answers for questions 10-18
+      const requestData = { action: 'analyzeFinalSet', answers };
+      
+      try {
+        const response = await fetch('/api/getEnneagram', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestData),
+        });
 
-      setAnalysis(data.analysis);
-      setFeedbackPrompt(true);
-    } catch (err) {
-      console.error('Error analyzing answers:', err);
-      setError(err.message);
-    }
-  };
+        const data = await response.json();
 
-  const handleFeedback = async (choice) => {
-    const feedback = {
-      analysis,
-      correct: choice === 'yes',
-      timestamp: new Date().toISOString(),
-    };
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to analyze answers');
+        }
 
-    try {
-      const response = await fetch('/api/feedback', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(feedback),
-      });
+        setAnalysis(data.analysis);
+        setFeedbackPrompt(true);
 
-      if (response.ok) {
-        alert('Thank you for your feedback!');
-        router.push('/');
-      } else {
-        alert('There was an error submitting your feedback.');
+      } catch (err) {
+        console.error('Error analyzing final answers:', err);
+        setError(err.message);
       }
-    } catch (err) {
-      console.error('Error submitting feedback:', err);
-      alert('There was an error submitting your feedback.');
     }
   };
 
   if (error) {
     return (
       <div className="p-6 bg-red-100 rounded-lg shadow-md max-w-[50rem] mx-auto mt-10">
-        <h2 className="text-2xl font-bold mb-4 text-red-800">
-          An error occurred
-        </h2>
+        <h2 className="text-2xl font-bold mb-4 text-red-800">An error occurred</h2>
         <p>{error}</p>
       </div>
     );
@@ -123,27 +126,25 @@ export default function EnneagramQuiz() {
   if (statements.length === 0) {
     return (
       <div className="p-6 bg-cardBackground rounded-lg shadow-md max-w-[50rem] mx-auto mt-10">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-          Loading...
-        </h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Loading...</h2>
       </div>
     );
   }
 
   return (
-    <div className="p-6 bg-cardBackground rounded-lg shadow-md max-w-[50rem] mx-auto mt-10">
+    <div className="p-6 bg-cardBackground rounded-lg shadow-md max-w-[50rem] mx-auto mt-20">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-        Enneagram Quiz
+        Enneagram Quiz {stage === 1 ? 'Part 1 (Questions 1-9)' : 'Part 2 (Questions 10-18)'}
       </h2>
       <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
 
       {!feedbackPrompt ? (
         <form onSubmit={handleSubmit} className="space-y-10">
-          {statements.map((statement, index) => (
+          {statements.map((statementObj, index) => (
             <div key={index} className="space-y-6">
               {/* Statement */}
               <label className="block text-xl font-bold text-gray-900 dark:text-gray-50">
-                {statement}
+                {statementObj.statement}
               </label>
 
               {/* Likert Scale Options */}
@@ -153,10 +154,7 @@ export default function EnneagramQuiz() {
                 </span>
                 <div className="flex justify-center gap-4">
                   {[1, 2, 3, 4, 5].map((value) => (
-                    <label
-                      key={value}
-                      className="flex flex-col items-center group cursor-pointer"
-                    >
+                    <label key={value} className="flex flex-col items-center group cursor-pointer">
                       <input
                         type="radio"
                         name={`statement-${index}`}
@@ -175,8 +173,6 @@ export default function EnneagramQuiz() {
                   Strongly agree
                 </span>
               </div>
-
-              {/* Divider */}
               <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
             </div>
           ))}
@@ -184,34 +180,13 @@ export default function EnneagramQuiz() {
             type="submit"
             className="mt-6 px-6 py-3 bg-accent text-white text-lg rounded-md hover:bg-blue-700 dark:hover:bg-blue-900 transition-colors duration-300"
           >
-            Submit
+            {stage === 1 ? 'Submit and Load Next Set' : 'Submit Final Answers'}
           </button>
         </form>
       ) : (
         <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">
           <h2 className="text-xl font-bold mb-2">Your Results</h2>
           <p className="whitespace-pre-line">{analysis}</p>
-          {feedbackPrompt && (
-            <div className="mt-4">
-              <p className="text-gray-800 dark:text-gray-300">
-                Do you think this analysis accurately reflects your personality?
-              </p>
-              <div className="space-x-2 mt-2">
-                <button
-                  onClick={() => handleFeedback('yes')}
-                  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 dark:bg-green-700 dark:hover:bg-green-800"
-                >
-                  Yes
-                </button>
-                <button
-                  onClick={() => handleFeedback('no')}
-                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 dark:bg-red-700 dark:hover:bg-red-800"
-                >
-                  No
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       )}
     </div>

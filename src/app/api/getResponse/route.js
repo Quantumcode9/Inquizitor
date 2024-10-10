@@ -8,15 +8,20 @@ const openai = new OpenAI({
 // generate random personality questions
 async function generatePersonalityQuestions() {
   const prompt = `
-  Generate exactly 10 personality-related questions, each with two distinct options labeled as a) and b). Return each question and its options in a clear bullet-point format, like this:
+Generate exactly 10 personality-related questions that target the four dimensions of the Myers-Briggs Type Indicator (MBTI).
+Each question should focus on one of the following pairs:
+- Extraversion (E) vs. Introversion (I)
+- Sensing (S) vs. Intuition (N)
+- Thinking (T) vs. Feeling (F)
+- Judging (J) vs. Perceiving (P)
 
-  How do you recharge your energy after a long day?
-    a) Spending time alone
-    b) Socializing with friends
-  How do you prefer to spend your weekends?
-    a) At home relaxing
-    b) Going out with friends
-  `;
+Ensure that each question focuses on only one dimension and provides two distinct options, labeled a) and b). 
+Return each question and its options in a clear bullet-point format, like this:
+
+How do you recharge your energy after a long day?
+  a) Spending time alone
+  b) Socializing with friends
+`;
 
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
@@ -73,18 +78,22 @@ export async function POST(request) {
       }
 
       const prompt = `
-  You are an advanced AI that provides users with a Myers & Briggs personality type based on their answers to a series of personality questions.
-
-  Answers:
-  ${formattedQA}
-
-  Analyze the user's personality based on these answers. 
-  Begin your analysis with a clear title formatted as:
-  "You are a <MBTI type>."
-
-  Then, offer a brief and concise analysis, summarizing the key traits of the personality type in relation to the user's answers.
-  Make the tone conversational yet insightful. Keep the response under 5 sentences.
-`;
+      You are an advanced AI that analyzes users' answers to a personality quiz based on the Myers-Briggs Type Indicator (MBTI).
+      
+      Below are the user's answers to 10 questions, each question corresponding to one of the MBTI dimensions:
+      1. Extraversion (E) vs. Introversion (I)
+      2. Sensing (S) vs. Intuition (N)
+      3. Thinking (T) vs. Feeling (F)
+      4. Judging (J) vs. Perceiving (P)
+      
+      Answers:
+      ${formattedQA}
+      
+      Based on the user's answers, determine their Myers-Briggs type. Start your analysis with:
+      "You are a <MBTI type>."
+      
+      Then, offer a brief and concise analysis, summarizing the key traits of the personality type in relation to the user's answers. Keep the tone conversational and insightful.
+      `;
       
 
       const response = await openai.chat.completions.create({

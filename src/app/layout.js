@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-          <header className="flex justify-between text-center fixed top-0 left-0 right-0 text-white p-4 bg-[#01949A] dark:bg-[#1E1E1E] shadow-md dark:shadow-none mb-4 z-50">
+          <header className="flex justify-between text-center fixed top-0 left-0 right-0 text-white p-4 bg-[#01949A] dark:bg-[#0D0D0D] shadow-md dark:shadow-none mb-4 z-50">
         <Link href="/">
         <div className="flex items-center">
         <img src="/static/owl-icon.png" alt="Icon" className="h-10 w-10 mr-2" />

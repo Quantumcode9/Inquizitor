@@ -5,62 +5,88 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-async function generateEnneagramStatements() {
-  const prompt = `
-Generate exactly 10 Enneagram personality statements that can be answered on a Likert scale from 1 to 5 (1: Strongly Disagree, 5: Strongly Agree). Just provide 10 clear statements. Here are some examples:
-
-1. I strive for perfection in everything I do.
-2. I am driven by the need to help others.
-`;
-
-  let response;
-  try {
-    response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: 'You are a personality quiz generator.' },
-        { role: 'user', content: prompt },
-      ],
-      temperature: 0.7,
-      max_tokens: 1000,
-    });
-  } catch (apiError) {
-    console.error('Error during OpenAI API call:', apiError);
-    throw new Error('Failed to generate Enneagram statements');
+async function analyzeFirstSet(answers) {
+  // validate the structure of answers
+  if (!Array.isArray(answers) || answers.length === 0) {
+    throw new Error('Invalid answers format: Expected a non-empty array');
   }
 
-  const statementsRaw = response.choices[0].message.content;
-  console.log('OpenAI response:', statementsRaw); // For debugging
+  // filter out answers where the user scored 1 or 2 (least likely types)
+  const filteredAnswers = answers.filter(answerObj => answerObj.answer >= 3);
 
-  // Split the response into individual statements
-  const statementsArray = statementsRaw
-    .split('\n')
-    .map((line) => line.trim()) // Remove extra whitespace
-    .filter(Boolean); // Filter out any empty lines
-
-  // Check to ensure 10 statements were generated
-  if (statementsArray.length < 10) {
-    console.error('Parsing failed. Not enough statements generated.');
-    throw new Error('Not enough statements generated');
+  // ensure that there are remaining likely types
+  if (filteredAnswers.length === 0) {
+    throw new Error('No remaining likely types after filtering out low scores');
   }
 
-  return statementsArray.slice(0, 10); // Return the first 10 statements
-}
-
-async function analyzeAnswers(answers) {
-  // format answers for the prompt
-  const formattedAnswers = answers
-    .map((answerObj, index) => `Type ${answerObj.type}: ${answerObj.answer}`)
+  // format the filtered answers for the OpenAI prompt
+  const formattedAnswers = filteredAnswers
+    .map(answerObj => `Type ${answerObj.type}: ${answerObj.statement}`)
     .join('\n');
 
   const prompt = `
-You are an advanced AI that determines a user's Enneagram personality type based on their responses to a series of statements.
+  You are an advanced AI trained in personality typing using the Enneagram model. 
+  Based on the user's responses to the Enneagram statements, narrow down the possible types to the top 3 most likely Enneagram types.
 
-The user has responded to statements associated with each Enneagram type on a Likert scale (1: Strongly Disagree to 5: Strongly Agree). Here are the responses:
+  Here are the user's responses:
+  ${formattedAnswers}
 
+  For each of these 3 types, generate exactly 3 new questions. Ensure the questions are phrased in a way that does not mention any specific type, and they should be answered on a Likert scale from 1 (Strongly Disagree) to 5 (Strongly Agree).
+
+  Return only the questions in the response, with their associated Enneagram type. Format each as: "Type X: Question".
+  `;
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      { role: 'system', content: 'You are an advanced personality quiz generator.' },
+      { role: 'user', content: prompt },
+    ],
+    temperature: 0.7,
+    max_tokens: 400,
+  });
+
+  if (!response || !response.choices || response.choices.length === 0) {
+    throw new Error('No valid response from OpenAI');
+  }
+
+  const newQuestionsRaw = response.choices[0].message.content;
+
+  // make sure the response isn't empty
+  if (!newQuestionsRaw) {
+    throw new Error('Received an invalid response content from OpenAI');
+  }
+
+  // parse new questions with valid structure
+  const newQuestions = newQuestionsRaw.split('\n')
+    .map(line => line.trim())
+    .filter(Boolean)
+    .map(questionLine => {
+      const [type, question] = questionLine.split(': ', 2);
+      if (!type || !question) {
+        throw new Error('Invalid question format in OpenAI response');
+      }
+      return {
+        type: parseInt(type.match(/\d+/)[0], 10), // extract the Enneagram type number
+        statement: question.trim(),
+      };
+    });
+
+  return newQuestions;
+}
+
+async function analyzeFinalSet(answers) {
+  const formattedAnswers = answers
+    .map((answerObj) => `Type ${answerObj.type}: ${answerObj.answer}`)
+    .join('\n');
+
+  const prompt = `
+You are an advanced AI that determines a user's Enneagram personality type based on their responses to statements corresponding to specific types.
+
+Here are the user's responses:
 ${formattedAnswers}
 
-Based on these responses, identify the user's main Enneagram type and their wing. The main type is the one that is most dominant in their responses, and the wing is the adjacent type (numerically) with the next highest level of influence.
+Using this data, calculate the user's most dominant Enneagram type and their wing. 
 
 Your response should be structured as follows:
 
@@ -85,31 +111,27 @@ Ensure that the analysis is concise and reflects the user's answers accurately.
   });
 
   if (!response || !response.choices || response.choices.length === 0) {
-    throw new Error('Failed to analyze answers');
+    throw new Error('Failed to analyze final answers');
   }
 
-  const analysis = response.choices[0].message.content;
-
-  // split the analysis into sentences
-  const sentences = analysis.match(/[^.!?]+[.!?]+/g) || [];
-  const formattedAnalysis = sentences.slice(0, 3).join('.\n') + (sentences.length > 3 ? '.\n' + sentences.slice(3).join(' ') : '');
-
-  return formattedAnalysis;
+  return response.choices[0].message.content;
 }
-
 // POST handler
 export async function POST(request) {
   try {
     const body = await request.json();
-    console.log('Request body:', body); // log the request body
-
     const { action, answers } = body;
 
-    if (action === 'generate') {
-      const statements = await generateEnneagramStatements();
-      return NextResponse.json({ statements });
-    } else if (action === 'analyze') {
-      const analysis = await analyzeAnswers(answers);
+    // ensure that answers are properly formatted as an array
+    if (!Array.isArray(answers) || answers.length === 0) {
+      return NextResponse.json({ error: 'Invalid answers format: Expected a non-empty array' }, { status: 400 });
+    }
+
+    if (action === 'analyzeFirstSet') {
+      const newQuestions = await analyzeFirstSet(answers);
+      return NextResponse.json({ newQuestions });
+    } else if (action === 'analyzeFinalSet') {
+      const analysis = await analyzeFinalSet(answers);
       return NextResponse.json({ analysis });
     } else {
       return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
