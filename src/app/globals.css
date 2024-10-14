@@ -4,9 +4,7 @@
 
 :root {
   --primary-color: #004369; 
-  --background: linear-gradient(90deg, #E5DDC8 0%, #FFFFFF 62%, #01949A 90%);
-  --background: -moz-linear-gradient(90deg, #E5DDC8 0%, #FFFFFF 62%, #01949A 90%);
-  --background: -webkit-linear-gradient(90deg, #E5DDC8 0%, #FFFFFF 62%, #01949A 90%);
+  --background: #ece6d8;
   --card-background: #FFFFFF; 
   --text-color: #333333; 
   --secondary-text-color: #666666; 
@@ -17,7 +15,7 @@
 
 :root.dark {
     --primary-color: #005d69;
-    --background: linear-gradient(360deg, #1A1A1A, #030303);
+    --background: #121212;
     --card-background: #1E1E1E; 
     --text-color: #E0E0E0; 
     --secondary-text-color: #B3B3B3; 
@@ -35,7 +33,7 @@ body {
 
 body.dark {
   --primary-color: #004369;
-  --background: linear-gradient(90deg, #1A1A1A, #121212);
+  --background: var(--background);
   --card-background: #1E1E1E; 
   --text-color: #E0E0E0; 
   --secondary-text-color: #B3B3B3; 
@@ -49,7 +47,7 @@ body.dark {
   }
 }
 
-/* 
+
  html, body {
   height: 100%;
   margin: 0;
@@ -63,5 +61,4 @@ body.dark {
 
 .flex-grow {
   flex-grow: 1;
-}   */
-
+}   

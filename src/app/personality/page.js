@@ -78,10 +78,11 @@ export default function Questionnaire() {
 
   if (questions.length === 0) {
     return (
-      <div className="p-6 bg-cardBackground rounded-lg mt-24 shadow-md max-w-[50rem] mx-auto">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-          Loading...
-        </h2>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-cardBackground mt-24 rounded-lg shadow-lg max-w-[60rem] mx-auto p-14 text-center space-y-8">
+        <h2 className="text-4xl font-extrabold text-gray-800 dark:text-gray-200">Generating quiz...</h2>
+        
+        {/* Spinner animation */}
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"></div>
       </div>
     );
   }
@@ -105,45 +106,45 @@ export default function Questionnaire() {
               <div className="space-y-2">
                 {/* Option A */}
                 <label
-                  htmlFor={`question-${index}-a`}
-                  className={`flex items-center text-center p-4 rounded-lg cursor-pointer transition-colors duration-200 ${
-                    selectedOptions[index] === question.optionA
-                      ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
-                      : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-darkPrimary dark:hover:text-gray-100'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    id={`question-${index}-a`}
-                    name={`question-${index}`}
-                    value={question.optionA}
-                    onChange={() => handleChange(index, question.optionA)}
-                    checked={selectedOptions[index] === question.optionA}
-                    className="sr-only"
-                  />
-                  <span>{question.optionA}</span>
-                </label>
+  htmlFor={`question-${index}-a`}
+  className={`flex items-center justify-center text-center p-4 rounded-lg cursor-pointer transition-colors duration-200 ${
+    selectedOptions[index] === question.optionA
+      ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
+      : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-darkPrimary dark:hover:text-gray-100'
+  }`}
+>
+  <input
+    type="radio"
+    id={`question-${index}-a`}
+    name={`question-${index}`}
+    value={question.optionA}
+    onChange={() => handleChange(index, question.optionA)}
+    checked={selectedOptions[index] === question.optionA}
+    className="sr-only"
+  />
+  <span className="w-full text-center">{question.optionA}</span>
+</label>
 
-                {/* Option B */}
-                <label
-                  htmlFor={`question-${index}-b`}
-                  className={`flex items-center text-center p-4 rounded-lg cursor-pointer transition-colors duration-200 ${
-                    selectedOptions[index] === question.optionB
-                      ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
-                      : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-darkPrimary dark:hover:text-gray-100'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    id={`question-${index}-b`}
-                    name={`question-${index}`}
-                    value={question.optionB}
-                    onChange={() => handleChange(index, question.optionB)}
-                    checked={selectedOptions[index] === question.optionB}
-                    className="sr-only"
-                  />
-                  <span>{question.optionB}</span>
-                </label>
+{/* Option B */}
+<label
+  htmlFor={`question-${index}-b`}
+  className={`flex items-center justify-center text-center p-4 rounded-lg cursor-pointer transition-colors duration-200 ${
+    selectedOptions[index] === question.optionB
+      ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
+      : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-darkPrimary dark:hover:text-gray-100'
+  }`}
+>
+  <input
+    type="radio"
+    id={`question-${index}-b`}
+    name={`question-${index}`}
+    value={question.optionB}
+    onChange={() => handleChange(index, question.optionB)}
+    checked={selectedOptions[index] === question.optionB}
+    className="sr-only"
+  />
+  <span className="w-full text-center">{question.optionB}</span>
+</label>
               </div>
 
               {/* Divider */}

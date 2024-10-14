@@ -125,8 +125,10 @@ export default function EnneagramQuiz() {
 
   if (statements.length === 0) {
     return (
-      <div className="p-6 bg-cardBackground rounded-lg shadow-md max-w-[50rem] mx-auto mt-10">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Loading...</h2>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-cardBackground mt-24 rounded-lg shadow-lg max-w-[60rem] mx-auto p-14 text-center space-y-8">
+        <h2 className="text-4xl font-extrabold text-gray-800 dark:text-gray-200">Personalizing your quiz...</h2>
+
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"></div>
       </div>
     );
   }
@@ -180,7 +182,7 @@ export default function EnneagramQuiz() {
             type="submit"
             className="mt-6 px-6 py-3 bg-accent text-white text-lg rounded-md hover:bg-blue-700 dark:hover:bg-blue-900 transition-colors duration-300"
           >
-            {stage === 1 ? 'Submit and Load Next Set' : 'Submit Final Answers'}
+            {stage === 1 ? 'Next' : 'Submit & Get Results'}
           </button>
         </form>
       ) : (

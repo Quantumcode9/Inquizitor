@@ -77,12 +77,12 @@ const handleFeedback = async (choice) => {
 
 if (questions.length === 0) {
     return (
-    <div className="p-6 bg-cardBackground mt-24 rounded-lg shadow-md max-w-[50rem] mx-auto mt-10">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Loading...</h2>
-    </div>
+      <div className="p-10 bg-cardBackground mt-24 rounded-lg shadow-lg max-w-[60rem] mx-auto text-center flex flex-col items-center justify-center space-y-6">
+        <h2 className="text-4xl font-extrabold mb-6 text-gray-800 dark:text-gray-200">Generating quiz...</h2>
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"></div>
+      </div>
     );
-}
-
+  }
 return (
     <div className="p-6 bg-cardBackground mt-24 rounded-lg shadow-md max-w-[50rem] mx-auto mt-10">
     <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Zodiac Quiz</h2>
