@@ -90,14 +90,6 @@
           { "option_text": "I am the creative visionary, inspiring new ideas and possibilities.", "sign": "Pisces" }
         ]
       },
-        {
-        "question": "How do you express love and affection?",
-        "responses": [
-          { "option_text": "I show my love through actions and gestures, rather than words.", "sign": "Scorpio" },
-          { "option_text": "I am deeply empathetic and prioritize emotional connection in my relationships.", "sign": "Cancer" },
-          { "option_text": "I express my emotions through creative outlets, like writing or art.", "sign": "Pisces" }
-        ]
-      },
 
       {
         "question": "How do you cope with disappointment or setbacks?",

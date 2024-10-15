@@ -3,30 +3,21 @@
         "id": 1,
         "question_text": "How do you approach challenges in your life?",
         "options": [
-            { "option_text": "I jump in immediately and take action, trusting that I’ll figure it out along the way.", "element": "Fire" },
-            { "option_text": "I carefully assess the situation, developing a step-by-step plan before moving forward.", "element": "Earth" },
-            { "option_text": "I analyze the challenge from multiple perspectives, brainstorming different approaches.", "element": "Air" },
-            { "option_text": "I rely on my gut feelings and emotions to guide me through the challenge.", "element": "Water" }
+            { "option_text": "I jump in and take action, trusting that I’ll figure it out along the way.", "element": "Fire" },
+            { "option_text": "I carefully assess the situation, then develop a step-by-step plan before moving forward.", "element": "Earth" },
+            { "option_text": "I analyze the challenge, then brainstorming different approaches.", "element": "Air" },
+            { "option_text": "I rely on my gut feelings and intuition to guide me through the challenge.", "element": "Water" }
         ]
         },
-        {
-        "id": 2,
-        "question_text": "When you set a long-term goal, how do you usually approach it?",
-        "options": [
-            { "option_text": "I dive into it with passion, but if it doesn’t happen quickly, I may lose interest.", "element": "Fire" },
-            { "option_text": "I stick to a solid plan, making slow and steady progress until I achieve it.", "element": "Earth" },
-            { "option_text": "I constantly adjust my approach, staying flexible and open to new ideas.", "element": "Air" },
-            { "option_text": "I visualize it and use my intuition to guide me.", "element": "Water" }
-        ]
-        },
+   
         {
         "id": 3,
         "question_text": "What role do you usually play in a group setting?",
         "options": [
             { "option_text": "The leader or motivator who inspires others.", "element": "Fire" },
-            { "option_text": "The reliable, grounded one who offers stability.", "element": "Earth" },
+            { "option_text": "The reliable and grounded one who offers stability.", "element": "Earth" },
             { "option_text": "The communicator or idea generator who keeps things moving.", "element": "Air" },
-            { "option_text": "The emotional support and creative problem-solver.", "element": "Water" }
+            { "option_text": "The support and creative problem-solver.", "element": "Water" }
         ]
         },
         {
@@ -42,12 +33,12 @@
 
         {
         "id": 5,
-        "question_text": "What type of vacation would you enjoy the most?",
+        "question_text": "Where would you move to if you could live anywhere in the world?",
         "options": [
-            { "option_text": "An adventure-filled trip, like hiking or exploring new places.", "element": "Fire" },
-            { "option_text": "A relaxing retreat in nature, like a cabin in the woods.", "element": "Earth" },
-            { "option_text": "A cultural tour in a bustling city full of art and conversation.", "element": "Air" },
-            { "option_text": "A peaceful getaway by the ocean or a lake.", "element": "Water" }
+            { "option_text": "I'm not picky, as long as it's exciting and full of opportunities.", "element": "Fire" },
+            { "option_text": "A peaceful countryside with nature and space.", "element": "Earth" },
+            { "option_text": "Somewhere with rich culture and art.", "element": "Air" },
+            { "option_text": "Somewhere quiet, near a beach", "element": "Water" }
         ]
         },
         {
@@ -67,7 +58,7 @@
             { "option_text": "I’m spontaneous and act quickly based on instinct and passion.", "element": "Fire" },
             { "option_text": "I’m cautious and methodical, making decisions only after thorough consideration.", "element": "Earth" },
             { "option_text": "I think things through logically and weigh all available options before deciding.", "element": "Air" },
-            { "option_text": "I listen to my intuition and let my emotions guide my choices.", "element": "Water" }
+            { "option_text": "I listen to my intuition and let my gut feelings guide me.", "element": "Water" }
         ]
         },
         {
@@ -77,7 +68,7 @@
             { "option_text": "Doing something active, like working out or playing sports.", "element": "Fire" },
             { "option_text": "Engaging in a hands-on project, like gardening or cooking.", "element": "Earth" },
             { "option_text": "Reading, learning, or socializing with friends.", "element": "Air" },
-            { "option_text": "Reflecting, writing, or meditating by water.", "element": "Water" }
+            { "option_text": "Reflecting, writing, or meditating.", "element": "Water" }
         ]
         },
         {
@@ -87,7 +78,7 @@
             { "option_text": "Through bold, energetic actions like performing, leading, or creating something impactful.", "element": "Fire" },
             { "option_text": "Through practical, hands-on activities like cooking, crafting, or building things.", "element": "Earth" },
             { "option_text": "Through words, ideas, or new concepts that challenge the way people think.", "element": "Air" },
-            { "option_text": "By channeling my emotions into art, music, or writing.", "element": "Water" }
+            { "option_text": "By channeling my energy into art, music, or writing.", "element": "Water" }
         ]
         },
         {
@@ -118,7 +109,7 @@
             { "option_text": "Through passionate conversations and shared experiences.", "element": "Fire" },
             { "option_text": "Through practical help, support, and reliability.", "element": "Earth" },
             { "option_text": "Through stimulating discussions, debates, and intellectual exchanges.", "element": "Air" },
-            { "option_text": "Through emotional connection, empathy, and understanding.", "element": "Water" }
+            { "option_text": "Through helping others, listening, and providing support.", "element": "Water" }
         
 
         ]
@@ -139,20 +130,20 @@
         "options": [
             { "option_text": "I seek out new challenges and experiences to push my limits and expand my horizons.", "element": "Fire" },
             { "option_text": "I focus on building a strong foundation and improving my skills through practice and discipline.", "element": "Earth" },
-            { "option_text": "I explore different ideas to broaden my understanding.", "element": "Air" },
-            { "option_text": "I reflect on my emotions, past experiences, and inner world to grow and heal.", "element": "Water" }
+            { "option_text": "I explore new or different ideas to broaden my understanding.", "element": "Air" },
+            { "option_text": "I reflect on my past experiences, and inner world to grow and heal.", "element": "Water" }
         
         ]
         },
 
         {
-        "id": 15,
+        "id": 2,
         "question_text": "Which of the following is most likely to derail your plans?",
         "options": [
-            { "option_text": "I lose interest if things aren’t happening fast enough or there’s not enough excitement.", "element": "Fire" },
-            { "option_text": "I stick to my plans too rigidly, even when flexibility might help me achieve more.", "element": "Earth" },
+            { "option_text": "Losing interest if things aren’t happening fast enough.", "element": "Fire" },
+            { "option_text": "Sticking to my plans too rigidly, even when they’re not working.", "element": "Earth" },
             { "option_text": "Indecisiveness leading to analysis paralysis.", "element": "Air" },
-            { "option_text": "Getting overwhelmed by emotions or self-doubt leading to inaction.", "element": "Water" }
+            { "option_text": "Becoming overwhelmed by emotions or self-doubt leading to inaction.", "element": "Water" }
         ]
         }
 

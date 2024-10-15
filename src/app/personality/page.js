@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import useScrollToTop from '@/hooks/use-top-scroll';
+
 
 export default function Questionnaire() {
   const [questions, setQuestions] = useState([]);
@@ -10,6 +12,7 @@ export default function Questionnaire() {
   const [feedbackPrompt, setFeedbackPrompt] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState({});
   const router = useRouter();
+
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -39,10 +42,11 @@ export default function Questionnaire() {
     }));
   };
 
+  useScrollToTop(analysis);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // send the answers array directly to the backend
     const response = await fetch('/api/getResponse', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -107,7 +111,7 @@ export default function Questionnaire() {
                 {/* Option A */}
                 <label
   htmlFor={`question-${index}-a`}
-  className={`flex items-center justify-center text-sm text-center p-4 rounded-lg cursor-pointer transition-colors duration-200 ${
+  className={`flex items-center justify-center text-base text-center p-4 rounded-lg cursor-pointer transition-colors duration-200 ${
     selectedOptions[index] === question.optionA
       ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
       : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-darkPrimary dark:hover:text-gray-100'
@@ -128,7 +132,7 @@ export default function Questionnaire() {
 {/* Option B */}
 <label
   htmlFor={`question-${index}-b`}
-  className={`flex items-center justify-center text-center p-4 rounded-lg cursor-pointer transition-colors duration-200 ${
+  className={`flex items-center justify-center text-base text-center p-4 rounded-lg cursor-pointer transition-colors duration-200 ${
     selectedOptions[index] === question.optionB
       ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
       : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-darkPrimary dark:hover:text-gray-100'

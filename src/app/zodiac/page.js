@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import questionsData from '../data/zodiacQuestions';
+import useScrollToTop from '@/hooks/use-top-scroll';
 
 export default function ZodiacQuiz() {
 const [questions, setQuestions] = useState([]);
@@ -12,6 +13,8 @@ const [additionalQuestions, setAdditionalQuestions] = useState([]);
 const [guessedZodiac, setGuessedZodiac] = useState('');
 const [stage, setStage] = useState(1);
 const [feedbackPrompt, setFeedbackPrompt] = useState(false);
+const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+const [currentAdditionalQuestionIndex, setCurrentAdditionalQuestionIndex] = useState(0); 
 const router = useRouter();
 const containerRef = useRef(null);
 
@@ -25,16 +28,14 @@ useEffect(() => {
 }, []);
 
 
-useEffect(() => {
-    if (stage === 2 && containerRef.current) {
-    containerRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-}, [stage]);
+useScrollToTop(stage);
 
 const handleChange = (questionIndex, option) => {
     const name = `question-${questionIndex}`;
     setAnswers((prevAnswers) => ({ ...prevAnswers, [name]: option }));
 };
+
+
 
 const calculateElementGroup = () => {
     const elementCount = { Fire: 0, Earth: 0, Air: 0, Water: 0 };
@@ -137,93 +138,158 @@ return (
     <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
         Zodiac Quiz <small>{stage === 1 ? '(Part 1/2)' : '(Part 2/2)'}</small>
     </h2>
+    <div className="w-full bg-gray-200 rounded-full h-4 mb-6">
+    <div
+        className="bg-blue-600 h-4 rounded-full transition-width duration-300"
+        style={{
+        width: `${stage === 1
+            ? ((currentQuestionIndex + 1) / 24) * 100
+            : ((currentAdditionalQuestionIndex + 1 + 14) / 24) * 100}%`
+        }}
+    ></div>
+</div>
     <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
     {stage === 1 && (
-        <form onSubmit={handleSubmit}>
-        {questions.map((question, index) => (
-            <div key={index} className="mb-6">
+<form onSubmit={handleSubmit}>
+    {questions.length > 0 && questions[currentQuestionIndex] ? (
+    <div className="mb-6">
         <span className="block text-gray-400 text-sm font-medium">
-        Question {index + 1}
+        Question {currentQuestionIndex + 1}
         </span>
-
-            <h3 className="text-lg font-semibold mb-4">{question.question_text}</h3>
-            {question.options.map((option, optIndex) => (
-                <label
-                key={optIndex}
-                htmlFor={`question-${index}-${optIndex}`}
-                className={`block p-4 mb-2 rounded-lg cursor-pointer transition-colors duration-200 ${
-                    answers[`question-${index}`] === option.option_text
-                    ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
-                    : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-gray-100'
-                }`}
-                >
-                <input
-                    type="radio"
-                    id={`question-${index}-${optIndex}`}
-                    name={`question-${index}`}
-                    value={option.option_text}
-                    onChange={() => handleChange(index, option.option_text)}
-                    checked={answers[`question-${index}`] === option.option_text}
-                    className="sr-only"
-                />
-                <span className="w-full text-base text-center">{option.option_text}</span>
-                </label>
-            ))}
-            </div>
-        ))}
-        <button
-            type="submit"
-            className="mt-4 px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
+        <h3 className="text-lg font-semibold mb-4">
+        {questions[currentQuestionIndex].question_text}
+        </h3>
+        {questions[currentQuestionIndex].options.map((option, optIndex) => (
+        <label
+            key={optIndex}
+            htmlFor={`question-${currentQuestionIndex}-${optIndex}`}
+            className={`block p-4 mb-2 rounded-lg cursor-pointer transition-colors duration-200 ${
+            answers[`question-${currentQuestionIndex}`] === option.option_text
+                ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
+                : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-gray-100'
+            }`}
         >
-            Submit
-        </button>
-        </form>
+            <input
+            type="radio"
+            id={`question-${currentQuestionIndex}-${optIndex}`}
+            name={`question-${currentQuestionIndex}`}
+            value={option.option_text}
+            onChange={() => handleChange(currentQuestionIndex, option.option_text)}
+            checked={answers[`question-${currentQuestionIndex}`] === option.option_text}
+            className="sr-only"
+            />
+            <span className="w-full text-base text-center">{option.option_text}</span>
+        </label>
+        ))}
+    </div>
+    ) : (
+    <p>Loading questions...</p> 
     )}
 
-{stage === 2 && additionalQuestions.length > 0 && (
-<form onSubmit={handleFinalSubmit}>
-{additionalQuestions.map((question, index) => (
-<div key={index} className="space-y-4">
-    <span className="block text-gray-400 text-sm font-medium">
-        Question {index + 15}
-    </span>
-    <label className="block text-lg font-semibold">
-    {question.question}
-    </label>
-    <div className="space-y-2">
-    {question.responses.map((response, optIndex) => (
-        <label
-        key={optIndex}
-        htmlFor={`additional-question-${index}-${optIndex}`}
-        className={`flex items-center justify-center p-4 rounded-lg cursor-pointer ${
-            answers[`additional-question-${index}`] === response.option_text
-            ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
-            : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-gray-100'
-        }`}
+    {/* Navigation Buttons */}
+    <div className="flex justify-between">
+    {currentQuestionIndex > 0 && (
+        <button
+        type="button"
+        onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
+        className="mt-4 px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
         >
-        <input
-            type="radio"
-            id={`additional-question-${index}-${optIndex}`}
-            name={`additional-question-${index}`}
-            value={response.option_text}
-            onChange={() =>
-            setAnswers((prevAnswers) => ({
-                ...prevAnswers,
-                [`additional-question-${index}`]: response.option_text,
-            }))
-            }
-            className="sr-only"
-        />
-        <span>{response.option_text}</span> 
-        </label>
-    ))}
+        Previous
+        </button>
+    )}
+
+    {currentQuestionIndex < questions.length - 1 ? (
+        <button
+        type="button"
+        onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
+        className="mt-4 px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
+        >
+        Next
+        </button>
+    ) : (
+        <button
+        type="submit"
+        className="mt-4 px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
+        >
+        Submit
+        </button>
+    )}
     </div>
-</div>
-))}
-    <button type="submit" className="mt-4 px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200">
-    Submit
-    </button>
 </form>
+)}
+{stage === 2 && (
+<form onSubmit={handleFinalSubmit}>
+    {additionalQuestions.length > 0 && additionalQuestions[currentAdditionalQuestionIndex] ? (
+    <div key={currentAdditionalQuestionIndex} className="space-y-4">
+        <span className="block text-gray-400 text-sm font-medium">
+        Question {currentAdditionalQuestionIndex + 15}
+        </span>
+        <label className="block text-lg font-semibold">
+        {additionalQuestions[currentAdditionalQuestionIndex].question}
+        </label>
+        <div className="space-y-2">
+        {additionalQuestions[currentAdditionalQuestionIndex].responses.map((response, optIndex) => (
+            <label
+            key={optIndex}
+            htmlFor={`additional-question-${currentAdditionalQuestionIndex}-${optIndex}`}
+            className={`flex items-center justify-center p-4 rounded-lg cursor-pointer ${
+                answers[`additional-question-${currentAdditionalQuestionIndex}`] === response.option_text
+                ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
+                : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-gray-100'
+            }`}
+            >
+            <input
+                type="radio"
+                id={`additional-question-${currentAdditionalQuestionIndex}-${optIndex}`}
+                name={`additional-question-${currentAdditionalQuestionIndex}`}
+                value={response.option_text}
+                onChange={() =>
+                setAnswers((prevAnswers) => ({
+                    ...prevAnswers,
+                    [`additional-question-${currentAdditionalQuestionIndex}`]: response.option_text,
+                }))
+                }
+                className="sr-only"
+            />
+            <span className="w-full text-base text-center">{response.option_text}</span>
+            </label>
+        ))}
+        </div>
+    </div>
+    ) : (
+    <p>Loading additional questions...</p> 
+    )}
+
+    {/* Navigation Buttons */}
+    <div className="flex justify-between mt-4">
+      {currentAdditionalQuestionIndex > 0 && (
+        <button
+          type="button"
+          onClick={() => setCurrentAdditionalQuestionIndex(currentAdditionalQuestionIndex - 1)}
+          className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+        >
+          Previous
+        </button>
+      )}
+
+      {currentAdditionalQuestionIndex < additionalQuestions.length - 1 ? (
+        <button
+          type="button"
+          onClick={() => setCurrentAdditionalQuestionIndex(currentAdditionalQuestionIndex + 1)}
+          className="px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
+        >
+          Next
+        </button>
+      ) : (
+        <button
+          type="submit"
+          className="px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
+        >
+          Submit
+        </button>
+      )}
+    </div>
+  </form>
 )}
 
 {stage === 3 && guessedZodiac && (

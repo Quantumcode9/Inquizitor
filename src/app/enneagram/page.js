@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import questionsData from '../data/enneagramQuestions';
+import useScrollToTop from '@/hooks/use-top-scroll';
 
 export default function EnneagramQuiz() {
   const [statements, setStatements] = useState([]);
@@ -10,18 +11,19 @@ export default function EnneagramQuiz() {
   const [analysis, setAnalysis] = useState('');
   const [feedbackPrompt, setFeedbackPrompt] = useState(false);
   const [error, setError] = useState(null); 
-  const [stage, setStage] = useState(1); // 1 for first set, 2 for second set
+  const [stage, setStage] = useState(1); 
+  const [loading, setLoading] = useState(false); 
   const router = useRouter();
 
-  //fisher-yates shuffle: a brand new dance 
+
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
-      [array[i], array[j]] = [array[j], array[i]]; // swap elements
+      const j = Math.floor(Math.random() * (i + 1)); 
+      [array[i], array[j]] = [array[j], array[i]]; 
     }
     return array;
   }
-
+  
 
   useEffect(() => {
     // stage 1 the first 9 questions
@@ -38,6 +40,12 @@ export default function EnneagramQuiz() {
     }
   }, [stage]);
 
+
+
+useScrollToTop(stage);
+
+
+
   const handleChange = (e, index) => {
     const value = e.target.value;
     const newAnswers = [...answers];
@@ -47,6 +55,8 @@ export default function EnneagramQuiz() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    
 
     // check if all questions are answered
     const allAnswered = answers.every((answerObj) => answerObj.answer !== '');
@@ -81,7 +91,8 @@ export default function EnneagramQuiz() {
             answer: '', 
           }))
         );
-        setStage(2); // move to the next stage
+        setStage(2);
+        setLoading(false);
 
       } catch (err) {
         console.error('Error analyzing answers:', err);
@@ -146,7 +157,7 @@ export default function EnneagramQuiz() {
       <div key={index} className="space-y-6">
         {/* Question Number */}
         <span className="block text-gray-400 text-sm font-medium">
-          Question {index + 1}
+        Question {stage === 1 ? index + 1 : index + 10}
         </span>
   
         {/* Statement */}
@@ -187,11 +198,18 @@ export default function EnneagramQuiz() {
       </div>
     ))}
     <button
-      type="submit"
-      className="mt-6 px-6 py-3 bg-accent text-white text-lg rounded-md hover:bg-blue-700 dark:hover:bg-blue-900 transition-colors duration-300"
-    >
-      {stage === 1 ? 'Next' : 'Submit & Get Results'}
-    </button>
+  type="submit"
+  className="mt-6 px-6 py-3 bg-accent text-white text-lg rounded-md hover:bg-blue-700 dark:hover:bg-blue-900 transition-colors duration-300"
+  disabled={loading} // just in case
+>
+  {loading
+    ? (stage === 1 
+      ? 'Personalizing statements...' 
+      : 'Analyzing Results...')
+    : (stage === 1 
+      ? 'Next' 
+      : 'Submit & Get Results')}
+</button>
   </form>
       ) : (
         <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">

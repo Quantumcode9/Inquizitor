@@ -92,7 +92,7 @@ export async function POST(request) {
       Based on the user's answers, determine their Myers-Briggs type. Start your analysis with:
       "You are a <MBTI type>."
       
-      Then, offer a brief and concise analysis, summarizing the key traits of the personality type in relation to the user's answers. Keep the tone conversational and insightful.
+      Then, offer a brief and concise analysis, summarizing the key traits of the personality type. 
       `;
       
 
@@ -103,7 +103,7 @@ export async function POST(request) {
           { role: 'user', content: prompt },
         ],
         temperature: 0.7,
-        max_tokens: 400,
+        max_tokens: 300,
       });
 
       if (!response || !response.choices || response.choices.length === 0) {
