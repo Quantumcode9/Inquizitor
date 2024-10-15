@@ -88,7 +88,7 @@ export default function EnneagramQuiz() {
         setError(err.message);
       }
     } else if (stage === 2) {
-      // submit answers for questions 10-18
+      // submit answers for final questions 
       const requestData = { action: 'analyzeFinalSet', answers };
       
       try {
@@ -136,55 +136,63 @@ export default function EnneagramQuiz() {
   return (
     <div className="p-6 bg-cardBackground rounded-lg shadow-md max-w-[50rem] mx-auto mt-20">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-        Enneagram Quiz {stage === 1 ? 'Part 1 (Questions 1-9)' : 'Part 2 (Questions 10-18)'}
+        Enneagram Quiz {stage === 1 ? '(Part 1/2)' : '(Part 2/2)'}
       </h2>
       <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
 
       {!feedbackPrompt ? (
-        <form onSubmit={handleSubmit} className="space-y-10">
-          {statements.map((statementObj, index) => (
-            <div key={index} className="space-y-6">
-              {/* Statement */}
-              <label className="block text-xl font-bold text-gray-900 dark:text-gray-50">
-                {statementObj.statement}
+    <form onSubmit={handleSubmit} className="space-y-10">
+    {statements.map((statementObj, index) => (
+      <div key={index} className="space-y-6">
+        {/* Question Number */}
+        <span className="block text-gray-400 text-sm font-medium">
+          Question {index + 1}
+        </span>
+  
+        {/* Statement */}
+        <label className="block text-lg sm:text-xl font-medium text-gray-900 dark:text-gray-50 leading-tight">
+          {statementObj.statement}
+        </label>
+  
+        {/* Likert Scale Options */}
+        <div className="flex justify-between items-center gap-4 my-6">
+          <span className="text-gray-500 font-light text-xs sm:text-sm dark:text-gray-400">
+            Strongly disagree
+          </span>
+          <div className="flex justify-center gap-4">
+            {[1, 2, 3, 4, 5].map((value) => (
+              <label
+                key={value}
+                className="flex flex-col items-center group cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  name={`statement-${index}`}
+                  value={value}
+                  checked={answers[index]?.answer === value}
+                  onChange={(e) => handleChange(e, index)}
+                  className="sr-only peer"
+                />
+                <span className="block w-8 h-8 sm:w-10 sm:h-10 bg-gray-200 text-center rounded-full leading-8 sm:leading-10 text-sm sm:text-lg font-semibold text-gray-600 transition-all duration-300 peer-checked:bg-blue-500 peer-checked:text-white peer-focus:ring-4 peer-focus:ring-blue-300 group-hover:bg-blue-100 dark:bg-gray-700 dark:peer-checked:bg-blue-500 dark:peer-focus:ring-blue-500 dark:text-gray-300">
+                  {value}
+                </span>
               </label>
-
-              {/* Likert Scale Options */}
-              <div className="flex justify-between items-center gap-4 my-6">
-                <span className="text-gray-500 font-light text-sm dark:text-gray-400">
-                  Strongly disagree
-                </span>
-                <div className="flex justify-center gap-4">
-                  {[1, 2, 3, 4, 5].map((value) => (
-                    <label key={value} className="flex flex-col items-center group cursor-pointer">
-                      <input
-                        type="radio"
-                        name={`statement-${index}`}
-                        value={value}
-                        checked={answers[index]?.answer === value}
-                        onChange={(e) => handleChange(e, index)}
-                        className="sr-only peer"
-                      />
-                      <span className="block w-10 h-10 bg-gray-200 text-center rounded-full leading-10 text-lg font-semibold text-gray-600 transition-all duration-300 peer-checked:bg-blue-500 peer-checked:text-white peer-focus:ring-4 peer-focus:ring-blue-300 group-hover:bg-blue-100 dark:bg-gray-700 dark:peer-checked:bg-blue-500 dark:peer-focus:ring-blue-500 dark:text-gray-300">
-                        {value}
-                      </span>
-                    </label>
-                  ))}
-                </div>
-                <span className="text-gray-500 font-light text-sm dark:text-gray-400">
-                  Strongly agree
-                </span>
-              </div>
-              <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
-            </div>
-          ))}
-          <button
-            type="submit"
-            className="mt-6 px-6 py-3 bg-accent text-white text-lg rounded-md hover:bg-blue-700 dark:hover:bg-blue-900 transition-colors duration-300"
-          >
-            {stage === 1 ? 'Next' : 'Submit & Get Results'}
-          </button>
-        </form>
+            ))}
+          </div>
+          <span className="text-gray-500 font-light text-xs sm:text-sm dark:text-gray-400">
+            Strongly agree
+          </span>
+        </div>
+        <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
+      </div>
+    ))}
+    <button
+      type="submit"
+      className="mt-6 px-6 py-3 bg-accent text-white text-lg rounded-md hover:bg-blue-700 dark:hover:bg-blue-900 transition-colors duration-300"
+    >
+      {stage === 1 ? 'Next' : 'Submit & Get Results'}
+    </button>
+  </form>
       ) : (
         <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">
           <h2 className="text-xl font-bold mb-2">Your Results</h2>

@@ -1,117 +1,94 @@
 import { NextResponse } from 'next/server';
+import questionsData from '@/app/data/zodiacQuestions2';
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
-apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
-// generate questions 
-async function generateZodiacQuestions() {
-  const prompt = `
-  Generate 5 personality-related questions that will help determine a person's likely zodiac sign.
-  Each question should have four distinct options, but do not label them with zodiac signs. Each option should describe different aspects of personality, such as how a person approaches challenges or how they prefer to socialize.
-  
-  Format the response like this:
-  
-  1. How do you react to a new challenge?
-  a) I dive in headfirst, ready to take action.
-  b) I plan everything carefully before taking the first step.
-  c) I like to brainstorm and get input from others before deciding.
-  d) I take my time weighing the pros and cons before moving forward.
-  
-  Avoid using specific zodiac sign labels in the options themselves. Focus on creating diverse personality traits for each option.
-  `;
 
+async function generateAdditionalQuestions(element) {
+  const questionsForElement = questionsData[element]; 
+  if (!questionsForElement) {
+    throw new Error(`No questions found for element: ${element}`);
+  }
+
+  return questionsForElement;
+}
+
+async function analyzeFinalAnswers(questionAnswers, element) {
+  const zodiacSigns = {
+    Water: ['Cancer', 'Scorpio', 'Pisces'],
+    Fire: ['Aries', 'Leo', 'Sagittarius'],
+    Earth: ['Taurus', 'Virgo', 'Capricorn'],
+    Air: ['Gemini', 'Libra', 'Aquarius']
+  };
+
+  const signsForElement = zodiacSigns[element];
+
+  if (!signsForElement) {
+    throw new Error(`Invalid element: ${element}. Unable to find zodiac signs for this element.`);
+  }
+
+  const responsesText = questionAnswers
+    .map((qa, idx) => `Q${idx + 1}: ${qa.question}\nA${idx + 1}: ${qa.answer}`)
+    .join('\n\n');
+
+  const prompt = `
+You are an expert astrologer.
+
+Based on the following responses, determine the most likely zodiac sign. Restrict your answer to the following zodiac signs: ${signsForElement.join(', ')}.
+
+${responsesText}
+
+Respond with:
+<zodiac sign>
+
+Then, provide a brief explanation.
+  `;
+  
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
     messages: [
-      { role: 'system', content: 'You are a personality quiz generator.' },
+      { role: 'system', content: 'You are an expert at identifying zodiac signs based on personality traits.' },
       { role: 'user', content: prompt },
     ],
     temperature: 0.7,
-    max_tokens: 600,
+    max_tokens: 400,
   });
 
-  if (!response || !response.choices || response.choices.length === 0) {
-    throw new Error('Failed to generate zodiac questions');
+  if (!response || !response.choices || !response.choices.length) {
+    throw new Error('Failed to guess zodiac sign');
   }
+  
+  const assistantMessage = response.choices[0].message.content.trim();
 
-  const questionsRaw = response.choices[0].message.content;
-
-  // parse the response into structured questions with four options
-  const questionsArray = questionsRaw
-    .split(/\n(?=\d+\.\s)/) 
-    .filter(Boolean) 
-    .map((questionText) => {
-      const [questionPart, ...optionsPart] = questionText
-        .split('\n')
-        .map(line => line.trim())
-        .filter(Boolean);
-
-      return {
-        question: questionPart || 'Question undefined',
-        options: optionsPart.map(opt => opt.replace(/^[a-d]\)\s*/, '').trim()),
-      };
-    })
-    .slice(0, 5);  
-
-  return questionsArray;
+  return {
+    guessedZodiac: assistantMessage
+  };
 }
 
 export async function POST(request) {
-    try {
-      const { action, questionAnswers } = await request.json();
+  try {
+    const { action, element, questionAnswers } = await request.json();
 
-if (action === 'generate') {
-    // generate zodiac-related questions
-    const questions = await generateZodiacQuestions();
-    return NextResponse.json({ questions });
+    console.log('Received request:', { action, element, questionAnswers });
 
-} else if (action === 'analyze') {
-    const responsesText = questionAnswers
-    .map(
-      (qa, idx) => `Q${idx + 1}: ${qa.question}\nA${idx + 1}: ${qa.answer}`
-    )
-    .join('\n\n');
+    if (action === 'generateAdditionalQuestions') {
+      const additionalQuestions = await generateAdditionalQuestions(element);
+      console.log('Generated questions:', additionalQuestions); 
+      return NextResponse.json({ additionalQuestions });
+    }
 
-    const prompt = `
-    You are an expert at analyzing personality traits to determine a person's zodiac sign based on their answers.
-    
-    Below are 5 questions related to personality traits and zodiac signs, along with the user's responses:
-    
-    ${responsesText}
-    
-    Based on these responses, identify the zodiac sign that most closely matches the traits.
-    Please consider the following zodiac signs and their key characteristics when making your decision.
+    if (action === 'analyzeFinalAnswers') {
+      const guessedZodiac = await analyzeFinalAnswers(questionAnswers, element);  
+      console.log('Guessed Zodiac:', guessedZodiac); 
+      return NextResponse.json({ guessedZodiac });
+    }
 
-    
-    Respond with:
-    "The most likely zodiac sign is: [zodiac sign]."
-    
-    Then, briefly explain how the user's responses align with the traits of this zodiac sign.
-    `;
-    
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: 'You are an expert at identifying zodiac signs based on personality traits.' },
-        { role: 'user', content: prompt },
-      ],
-      temperature: 0.7,
-      max_tokens: 400,
-    });
-
-  if (!response || !response.choices || response.choices.length === 0) {
-    throw new Error('Failed to guess zodiac sign');
+    return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
+  } catch (error) {
+    console.error('Error occurred:', error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
-
-  const guessedZodiac = response.choices[0].message.content.trim();
-  return NextResponse.json({ guessedZodiac });
-} else {
-  return NextResponse.json({ error: 'Invalid action provided' }, { status: 400 });
-}
-} catch (error) {
-console.error(error);
-return NextResponse.json({ error: error.message }, { status: 500 });
-}
 }

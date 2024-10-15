@@ -98,7 +98,7 @@ export default function Questionnaire() {
           {questions.map((question, index) => (
             <div key={index} className="space-y-4">
               {/* Question */}
-              <label className="block text-lg font-semibold text-gray-900 dark:text-gray-100">
+              <label className="block text-base font-semibold text-gray-900 dark:text-gray-100">
                 {question.question}
               </label>
 
@@ -107,7 +107,7 @@ export default function Questionnaire() {
                 {/* Option A */}
                 <label
   htmlFor={`question-${index}-a`}
-  className={`flex items-center justify-center text-center p-4 rounded-lg cursor-pointer transition-colors duration-200 ${
+  className={`flex items-center justify-center text-sm text-center p-4 rounded-lg cursor-pointer transition-colors duration-200 ${
     selectedOptions[index] === question.optionA
       ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
       : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-darkPrimary dark:hover:text-gray-100'
@@ -161,11 +161,18 @@ export default function Questionnaire() {
         </form>
       )}
 
-      {analysis && (
-        <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">
-          <p className="whitespace-pre-line">{analysis}</p>
-        </div>
-      )}
+{analysis && (
+  <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">
+    <p className="whitespace-pre-line ">
+      <span className="font-bold text-2xl">
+        {analysis.split('\n')[0]}
+      </span>
+      <span>
+        {analysis.split('\n').slice(1).join('\n')}
+      </span>
+    </p>
+  </div>
+)}
 
       {feedbackPrompt && (
         <div className="mt-4">

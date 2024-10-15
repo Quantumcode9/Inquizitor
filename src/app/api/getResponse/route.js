@@ -81,10 +81,10 @@ export async function POST(request) {
       You are an advanced AI that analyzes users' answers to a personality quiz based on the Myers-Briggs Type Indicator (MBTI).
       
       Below are the user's answers to 10 questions, each question corresponding to one of the MBTI dimensions:
-      1. Extraversion (E) vs. Introversion (I)
-      2. Sensing (S) vs. Intuition (N)
-      3. Thinking (T) vs. Feeling (F)
-      4. Judging (J) vs. Perceiving (P)
+      Extraversion (E) vs. Introversion (I)
+      Sensing (S) vs. Intuition (N)
+      Thinking (T) vs. Feeling (F)
+      Judging (J) vs. Perceiving (P)
       
       Answers:
       ${formattedQA}
