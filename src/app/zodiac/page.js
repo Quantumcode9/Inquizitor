@@ -108,7 +108,8 @@ const handleFinalSubmit = async (e) => {
 
 const handleFeedback = async (choice) => {
     const feedback = {
-    analysis: guessedZodiac,
+    
+    analysis: guessedZodiac.guessedZodiac.split('\n')[0],
     correct: choice === 'yes',
     timestamp: new Date().toISOString(),
     };
@@ -235,7 +236,7 @@ return (
     {feedbackPrompt && (
             <div className="mt-4">
             <p className="text-gray-800 dark:text-gray-300">
-                Do you agree with the analysis?
+                Were these results accurate?
             </p>
             <div className="space-x-2 mt-2">
                 <button

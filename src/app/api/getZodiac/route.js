@@ -41,8 +41,7 @@ Based on the following responses, determine the most likely zodiac sign. Restric
 
 ${responsesText}
 
-Respond with:
-<zodiac sign>
+First respond with the zodiac sign only, without any additional text.
 
 Then, provide a brief explanation.
   `;
