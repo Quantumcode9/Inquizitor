@@ -1,0 +1,218 @@
+
+[
+
+{
+    "question": "How do you manage your time and tasks?",
+    "optionA": "Sticking to a set schedule and deadlines",
+    "optionB": "Being adaptable and open to changes",
+    "type": "J vs P"
+},
+
+
+{
+    "question": "How do you recharge after a long day?",
+    "optionA": "Spending time alone",
+    "optionB": "Socializing with friends",
+    "type": "I vs E"
+},
+
+    {
+        "question": "Do you prefer to work in a team or independently?",
+        "optionA": "Working in a team",
+        "optionB": "Working independently",
+        "type": "I vs E"
+    },
+    
+    {
+        "question": "Do you prefer to plan things out or be spontaneous?",
+        "optionA": "Planning things out",
+        "optionB": "Being spontaneous",
+        "type": "J vs P"
+    },
+    
+    {
+        "question": "Do you prefer to focus on the present or think about the future?",
+        "optionA": "Focus on the present",
+        "optionB": "Think about the future",
+        "type": "S vs N"
+    },
+    
+    {
+        "question": "Do you prefer to make decisions based on logic or emotions?",
+        "optionA": "Logic",
+        "optionB": "Emotions",
+        "type": "T vs F"
+    },
+    
+    {
+        "question": "Do you prefer to follow a set routine or be flexible?",
+        "optionA": "Follow a set routine",
+        "optionB": "Be flexible",
+        "type": "J vs P"
+    },
+    
+    {
+        "question": "Do you prefer to work in a structured environment or a more relaxed one?",
+        "optionA": "Structured environment",
+        "optionB": "Relaxed environment",
+        "type": "J vs P"
+    },
+    
+    {
+        "question": "Do you prefer to focus on the big picture or the details?",
+        "optionA": "Big picture",
+        "optionB": "Details",
+        "type": "S vs N"
+    },
+
+{
+    "question": "When making decisions, do you prefer to focus on:",
+    "optionA": "Concrete facts and details",
+    "optionB": "The bigger picture and possibilities",
+    "type": "S vs N"
+},
+
+{
+    "question": "In a discussion, do you tend to prioritize:",
+    "optionA": "Logical reasoning and objective analysis",
+    "optionB": "Personal values and the feelings of others",
+    "type": "T vs F"
+},
+
+{
+    "question": "When organizing your schedule, do you like to:",
+    "optionA": "Plan everything in advance",
+    "optionB": "Keep your options open and be spontaneous",
+    "type": "J vs P"
+},
+
+{
+    "question": "In a new social situation, do you usually:",
+    "optionA": "Jump right in and start conversations",
+    "optionB": "Observe and wait for the right moment to join in",
+    "type": "I vs E"
+},
+
+{
+    "question": "When processing information, do you find yourself:",
+    "optionA": "Focusing on practical experiences and observations",
+    "optionB": "Thinking about concepts and future implications",
+    "type": "S vs N"
+},
+
+{
+    "question": "When faced with a conflict, do you generally:",
+    "optionA": "Analyze the situation logically to find a resolution",
+    "optionB": "Consider the emotional impact on everyone involved",
+    "type": "T vs F"
+},
+
+{
+    "question": "When working on a project, do you prefer to:",
+    "optionA": "Stick to a clear plan and deadlines",
+    "optionB": "Adapt and change your approach as you go along",
+    "type": "J vs P"
+},
+
+{
+    "question": "In your daily life, do you often:",
+    "optionA": "Enjoy routine and structure",
+    "optionB": "Thrive on flexibility and spontaneity",
+    "type": "J vs P"
+},
+
+{
+    "question": "Do you tend to feel more fulfilled by:",
+    "optionA": "Achieving concrete results and accomplishments",
+    "optionB": "Building connections and helping others feel good",
+    "type": "T vs F"
+},
+
+{
+    "question": "When learning something new, do you prefer to:",
+    "optionA": "Master the details and practical applications",
+    "optionB": "Explore the underlying theories and concepts",
+    "type": "S vs N"
+},
+{
+    "question": "In discussions I…",
+    "optionA": "Relying on logic and objective analysis",
+    "optionB": "Valuing the feelings and perspectives of others",
+    "type": "T vs F"
+},
+
+{
+    "question": "When approaching tasks, Its important to",
+    "optionA": "Create a detailed plan and sticking to it",
+    "optionB": "Be flexible and adapt as you go",
+    "type": "J vs P"
+},
+
+{
+    "question": "Which do you feel more comfortable?",
+    "optionA": "Following a routine and maintaining structure",
+    "optionB": "Embracing spontaneity and going with the flow",
+    "type": "J vs P"
+},
+
+{
+    "question": "When working on a project, do you prefer to:",
+    "optionA": "Stick to a clear plan and deadlines",
+    "optionB": "Adapt and change your approach as you go along",
+    "type": "J vs P"
+},
+
+{
+    "question": "In your daily life, do you often:",
+    "optionA": "Enjoy routine and structure",
+    "optionB": "Thrive on flexibility and spontaneity",
+    "type": "J vs P"
+},
+
+{
+    "question": "Do you tend to feel more fulfilled by:",
+    "optionA": "Achieving concrete results and accomplishments",
+    "optionB": "Building connections and helping others feel good",
+    "type": "T vs F"
+},
+
+{
+    "question": "When learning something new, do you prefer to:",
+    "optionA": "Master the details and practical applications",
+    "optionB": " Explore the underlying theories and concepts",
+    "type": "S vs N"
+},
+
+{
+    "question": "When you attend a party, do you prefer to:",
+    "optionA": "Mingle with many different people",
+    "optionB": "Stick with a few close friends",
+    "type": "I vs E"
+},
+{
+    "question": "After a long week, do you recharge by:",
+    "optionA": "Going out with friends and socializing",
+    "optionB": "Spending some quiet time alone",
+    "type": "I vs E"
+},
+{
+    "question": "In a group setting, do you tend to:",
+    "optionA": "Lead the conversation and share your thoughts openly",
+    "optionB": "Listen more and contribute when you feel comfortable",
+    "type": "I vs E"
+},
+{
+    "question": "During your free time, do you prefer:",
+    "optionA": "Participating in group activities or events",
+    "optionB": "Enjoying solitary or small, intimate gatherings",
+    "type": "I vs E"
+},
+{
+    "question": "When meeting new people, do you find it:",
+    "optionA": "Exciting and energizing",
+    "optionB": "Draining and prefer to take your time warming up",
+    "type": "I vs E"
+}
+
+
+]

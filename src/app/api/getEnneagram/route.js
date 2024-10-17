@@ -6,23 +6,33 @@ const openai = new OpenAI({
 });
 
 async function analyzeFirstSet(answers) {
-  // validate the structure of answers
+  console.log('Initial answers:', JSON.stringify(answers, null, 2));
+
   if (!Array.isArray(answers) || answers.length === 0) {
     throw new Error('Invalid answers format: Expected a non-empty array');
   }
 
-  // filter out answers where the user scored 1 or 2 (least likely types)
-  const filteredAnswers = answers.filter(answerObj => answerObj.answer >= 3);
 
-  // ensure that there are remaining likely types
-  if (filteredAnswers.length === 0) {
-    throw new Error('No remaining likely types after filtering out low scores');
+  let filteredAnswers = answers.filter(answerObj => answerObj.answer >= 4);
+
+
+  if (filteredAnswers.length < 3) {
+    const fallbackAnswers = answers.filter(answerObj => answerObj.answer === 3);
+    filteredAnswers = [...filteredAnswers, ...fallbackAnswers];
   }
 
-  // format the filtered answers for the OpenAI prompt
-  const formattedAnswers = filteredAnswers
+  filteredAnswers.sort((a, b) => b.answer - a.answer || a.type - b.type);
+
+  // Ensure we only send the top 3 answers
+  const top3Answers = filteredAnswers.slice(0, 3);
+
+  console.log('Top 3 answers:', JSON.stringify(top3Answers, null, 2));
+
+  const formattedAnswers = top3Answers
     .map(answerObj => `Type ${answerObj.type}: ${answerObj.statement}`)
     .join('\n');
+
+  console.log('Formatted answers for prompt:', formattedAnswers);
 
   const prompt = `
   You are an advanced AI trained in personality typing using the Enneagram model. 
@@ -43,8 +53,9 @@ async function analyzeFirstSet(answers) {
       { role: 'user', content: prompt },
     ],
     temperature: 0.7,
-    max_tokens: 400,
+    max_tokens: 500,
   });
+
 
   if (!response || !response.choices || response.choices.length === 0) {
     throw new Error('No valid response from OpenAI');
@@ -52,6 +63,8 @@ async function analyzeFirstSet(answers) {
 
   const newQuestionsRaw = response.choices[0].message.content;
 
+    // Log the raw new questions content
+    console.log('Raw new questions content:', newQuestionsRaw);
   // make sure the response isn't empty
   if (!newQuestionsRaw) {
     throw new Error('Received an invalid response content from OpenAI');
@@ -80,6 +93,7 @@ async function analyzeFinalSet(answers) {
     .map((answerObj) => `Type ${answerObj.type}: ${answerObj.answer}`)
     .join('\n');
 
+    console.log('Formatted answers for prompt 2:', formattedAnswers);
   const prompt = `
 You are an advanced AI that determines a user's Enneagram personality type based on their responses to statements corresponding to specific types.
 
@@ -109,6 +123,8 @@ Ensure that the analysis is concise and reflects the user's answers accurately.
     temperature: 0.7,
     max_tokens: 500,
   });
+
+  console.log('OpenAI response 2:', JSON.stringify(response, null, 2));
 
   if (!response || !response.choices || response.choices.length === 0) {
     throw new Error('Failed to analyze final answers');

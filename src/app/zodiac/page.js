@@ -136,7 +136,7 @@ return (
     className="p-6 bg-cardBackground rounded-lg shadow-md max-w-[50rem] mx-auto mt-20"
     >   
     <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-        Zodiac Quiz <small>{stage === 1 ? '(Part 1/2)' : '(Part 2/2)'}</small>
+        Zodiac Quiz <small>{stage === 1 ? 'Part 1/2' : 'Part 2/2'}</small>
     </h2>
     <div className="w-full bg-gray-200 rounded-full h-4 mb-6">
     <div
@@ -148,11 +148,13 @@ return (
         }}
     ></div>
 </div>
+
     <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
     {stage === 1 && (
 <form onSubmit={handleSubmit}>
     {questions.length > 0 && questions[currentQuestionIndex] ? (
     <div className="mb-6">
+     
         <span className="block text-gray-400 text-sm font-medium">
         Question {currentQuestionIndex + 1}
         </span>
@@ -166,7 +168,7 @@ return (
             className={`block p-4 mb-2 rounded-lg cursor-pointer transition-colors duration-200 ${
             answers[`question-${currentQuestionIndex}`] === option.option_text
                 ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
-                : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-gray-100'
+                : 'bg-gray-100  border border-accent dark:bg-[#333] dark:border hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-gray-100'
             }`}
         >
             <input
@@ -235,7 +237,7 @@ return (
             className={`flex items-center justify-center p-4 rounded-lg cursor-pointer ${
                 answers[`additional-question-${currentAdditionalQuestionIndex}`] === response.option_text
                 ? 'bg-primary text-white dark:bg-darkPrimary dark:text-gray-100'
-                : 'bg-gray-100 dark:bg-[#333] hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-gray-100'
+                : 'bg-gray-100 border border-accent dark:bg-[#333] dark:border hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-gray-100'
             }`}
             >
             <input
@@ -262,34 +264,34 @@ return (
 
     {/* Navigation Buttons */}
     <div className="flex justify-between mt-4">
-      {currentAdditionalQuestionIndex > 0 && (
+    {currentAdditionalQuestionIndex > 0 && (
         <button
-          type="button"
-          onClick={() => setCurrentAdditionalQuestionIndex(currentAdditionalQuestionIndex - 1)}
-          className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+        type="button"
+        onClick={() => setCurrentAdditionalQuestionIndex(currentAdditionalQuestionIndex - 1)}
+        className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
         >
-          Previous
+        Previous
         </button>
-      )}
+    )}
 
-      {currentAdditionalQuestionIndex < additionalQuestions.length - 1 ? (
+    {currentAdditionalQuestionIndex < additionalQuestions.length - 1 ? (
         <button
-          type="button"
-          onClick={() => setCurrentAdditionalQuestionIndex(currentAdditionalQuestionIndex + 1)}
-          className="px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
+        type="button"
+        onClick={() => setCurrentAdditionalQuestionIndex(currentAdditionalQuestionIndex + 1)}
+        className="px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
         >
-          Next
+        Next
         </button>
-      ) : (
+    ) : (
         <button
-          type="submit"
-          className="px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
+        type="submit"
+        className="px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
         >
-          Submit
+        Submit
         </button>
-      )}
+    )}
     </div>
-  </form>
+</form>
 )}
 
 {stage === 3 && guessedZodiac && (
