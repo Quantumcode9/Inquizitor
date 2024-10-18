@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import useScrollToTop from '@/hooks/use-top-scroll';
 import staticQuestions from '../data/myersbriggsQuestions.json';
-import router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function Questionnaire() {
   const [questions, setQuestions] = useState([]);
@@ -12,6 +12,8 @@ export default function Questionnaire() {
   const [feedbackPrompt, setFeedbackPrompt] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  const router = useRouter();
 
   useScrollToTop(analysis);
 
@@ -145,7 +147,7 @@ export default function Questionnaire() {
 <hr className="border-t border-gray-300 mb-2 dark:border-gray-600 my-4" />
 
       {!analysis && (
-        <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
           {questions.length > 0 && (
             <div key={currentQuestionIndex} className="space-y-4">
               <span className="block text-gray-400 text-sm mb-6 font-medium">
@@ -199,16 +201,15 @@ export default function Questionnaire() {
             </div>
           )}
 
-          <div className="flex justify-between mt-4">
+<div className="flex justify-between mt-4">
             {currentQuestionIndex > 0 && (
-            <button
-              type="button"
-              onClick={handlePreviousQuestion}
-              disabled={currentQuestionIndex === 0}
-              className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-            >
-              Previous
-            </button>
+              <button
+                type="button"
+                onClick={handlePreviousQuestion}
+                className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+              >
+                Previous
+              </button>
             )}
 
             {currentQuestionIndex < questions.length - 1 ? (
@@ -221,7 +222,8 @@ export default function Questionnaire() {
               </button>
             ) : (
               <button
-                type="submit"
+                type="button"
+                onClick={handleSubmit}
                 className="px-4 py-2 bg-green-500 text-white rounded-lg"
               >
                 Submit

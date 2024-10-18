@@ -4,8 +4,8 @@
 
 :root {
   --primary-color: #004369; 
-  --background: #ece6d8;
-  --card-background: #FFFFFF; 
+  --background: #ebe8df;
+  --card-background: #ffffff;
   --text-color: #333333; 
   --secondary-text-color: #666666; 
   --accent-color: #01949A; 
@@ -47,7 +47,7 @@ body.dark {
   }
 }
 
-
+/* 
  html, body {
   height: 100%;
   margin: 0;
@@ -61,7 +61,7 @@ body.dark {
 
 .flex-grow {
   flex-grow: 1;
-}   
+}    */
 
 
 
