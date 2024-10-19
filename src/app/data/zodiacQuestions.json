@@ -1,33 +1,32 @@
 [
-        {
+    {
         "id": 1,
-        "question_text": "How do you approach challenges in your life?",
+        "question_text": "How do you handle challenges?",
         "options": [
-            { "option_text": "I jump in and take action, trusting that I’ll figure it out along the way.", "element": "Fire" },
-            { "option_text": "I carefully assess the situation, then develop a step-by-step plan before moving forward.", "element": "Earth" },
-            { "option_text": "I analyze the challenge, then brainstorming different approaches.", "element": "Air" },
-            { "option_text": "I rely on my gut feelings and intuition to guide me through the challenge.", "element": "Water" }
+            { "option_text": "I take action and figure it out along the way.", "element": "Fire" },
+            { "option_text": "I assess, then create a step-by-step plan.", "element": "Earth" },
+            { "option_text": "I brainstorm and analyze different approaches.", "element": "Air" },
+            { "option_text": "I trust my intuition to guide me.", "element": "Water" }
         ]
-        },
-   
+},
         {
         "id": 3,
-        "question_text": "What role do you usually play in a group setting?",
+        "question_text": "What is your role in a group?",
         "options": [
-            { "option_text": "The leader or motivator who inspires others.", "element": "Fire" },
-            { "option_text": "The reliable and grounded one who offers stability.", "element": "Earth" },
-            { "option_text": "The communicator or idea generator who keeps things moving.", "element": "Air" },
-            { "option_text": "The support and creative problem-solver.", "element": "Water" }
+            { "option_text": "The leader who inspires others.", "element": "Fire" },
+            { "option_text": "The reliable one who offers stability.", "element": "Earth" },
+            { "option_text": "The idea generator who keeps things moving.", "element": "Air" },
+            { "option_text": "The creative problem-solver.", "element": "Water" }
         ]
         },
         {
         "id": 4,
         "question_text": "How do you handle emotions?",
         "options": [
-            { "option_text": "I can can get intense but I let it fuel my motivation.", "element": "Fire" },
-            { "option_text": "I tend to keep them to myself and focus on practical matters.", "element": "Earth" },
-            { "option_text": "I rationalize my feelings and try to detach from them.", "element": "Air" },
-            { "option_text": "I feel them deeply but don’t always express them outwardly.", "element": "Water" }
+            { "option_text": "I get intense but use it as motivation.", "element": "Fire" },
+            { "option_text": "I keep them to myself and focus on practical matters.", "element": "Earth" },
+            { "option_text": "I rationalize and detach from them.", "element": "Air" },
+            { "option_text": "I feel them deeply but don’t show them much.", "element": "Water" }
         ]
         },
 
@@ -35,10 +34,10 @@
         "id": 5,
         "question_text": "Where would you move to if you could live anywhere in the world?",
         "options": [
-            { "option_text": "I'm not picky, as long as it's exciting and full of opportunities.", "element": "Fire" },
-            { "option_text": "A peaceful countryside with nature and space.", "element": "Earth" },
-            { "option_text": "Somewhere with rich culture and art.", "element": "Air" },
-            { "option_text": "Somewhere quiet, near a beach", "element": "Water" }
+            { "option_text": "Somewhere exciting and full of opportunities.", "element": "Fire" },
+            { "option_text": "A peaceful countryside close to nature.", "element": "Earth" },
+            { "option_text": "A place rich in culture and art.", "element": "Air" },
+            { "option_text": "A quiet spot near a beach.", "element": "Water" }
         ]
         },
         {
@@ -55,82 +54,80 @@
         "id": 7,
         "question_text": "What type of decision-making style best describes you?",
         "options": [
-            { "option_text": "I’m spontaneous and act quickly based on instinct and passion.", "element": "Fire" },
-            { "option_text": "I’m cautious and methodical, making decisions only after thorough consideration.", "element": "Earth" },
-            { "option_text": "I think things through logically and weigh all available options before deciding.", "element": "Air" },
-            { "option_text": "I listen to my intuition and let my gut feelings guide me.", "element": "Water" }
-        ]
+            { "option_text": "I act quickly on instinct and passion.", "element": "Fire" },
+            { "option_text": "I’m cautious and consider all options.", "element": "Earth" },
+            { "option_text": "I think logically and weigh all choices.", "element": "Air" },
+            { "option_text": "I listen to my gut feelings.", "element": "Water" }        ]
         },
         {
         "id": 8,
         "question_text": "How do you spend your free time?",
         "options": [
-            { "option_text": "Doing something active, like working out or playing sports.", "element": "Fire" },
+            { "option_text": "Doing something active, like sports or working out.", "element": "Fire" },
             { "option_text": "Engaging in a hands-on project, like gardening or cooking.", "element": "Earth" },
-            { "option_text": "Reading, learning, or socializing with friends.", "element": "Air" },
-            { "option_text": "Reflecting, writing, or meditating.", "element": "Water" }
+            { "option_text": "Socializing with friends, reading, or learning something new.", "element": "Air" },
+            { "option_text": "Relaxing, meditating, writing, or spending time in nature.", "element": "Water" }
         ]
         },
         {
         "id": 9,
-        "question_text": "How do you usually express yourself creatively?",
+        "question_text": "How do you express yourself creatively?",
         "options": [
-            { "option_text": "Through bold, energetic actions like performing, leading, or creating something impactful.", "element": "Fire" },
-            { "option_text": "Through practical, hands-on activities like cooking, crafting, or building things.", "element": "Earth" },
-            { "option_text": "Through words, ideas, or new concepts that challenge the way people think.", "element": "Air" },
-            { "option_text": "By channeling my energy into art, music, or writing.", "element": "Water" }
+            { "option_text": "Through bold actions like performing or leading.", "element": "Fire" },
+            { "option_text": "Through practical activities like crafting or building.", "element": "Earth" },
+            { "option_text": "Through words, ideas, or concepts.", "element": "Air" },
+            { "option_text": "Through mediums like art, music, or writing.", "element": "Water" }
         ]
         },
         {
         "id": 10,
-        "question_text": "What motivates you the most to get things done?",
+        "question_text": "What motivates you to get things done?",
         "options": [
-            { "option_text": "The thrill of new experiences and the excitement of taking risks.", "element": "Fire" },
-            { "option_text": "The satisfaction of completing tasks and achieving tangible results.", "element": "Earth" },
-            { "option_text": "The mental stimulation of learning, problem-solving, and exploring new ideas.", "element": "Air" },
-            { "option_text": "The internal reward I feel when I’ve completed something meaningful.", "element": "Water" }
+            { "option_text": "The thrill of new experiences and risks.", "element": "Fire" },
+            { "option_text": "The satisfaction of completing tasks.", "element": "Earth" },
+            { "option_text": "The mental stimulation of problem-solving.", "element": "Air" },
+            { "option_text": "The internal reward of completing something meaningful.", "element": "Water" }
         ]
         },
         {
         "id": 11,
         "question_text": "How do you approach learning new things?",
         "options": [
-            { "option_text": "I prefer hands-on experiences and learning through trial and error.", "element": "Fire" },
-            { "option_text": "I like to study and practice until I master a new skill or subject.", "element": "Earth" },
-            { "option_text": "I enjoy exploring different perspectives and engaging in intellectual discussions.", "element": "Air" },
-            { "option_text": "I learn best when I can connect emotionally to the subject or experience.", "element": "Water" }
+            { "option_text": "I prefer hands-on learning by trial and error.", "element": "Fire" },
+            { "option_text": "I study and practice until I master it.", "element": "Earth" },
+            { "option_text": "I explore ideas and engage in discussions.", "element": "Air" },
+            { "option_text": "I connect emotionally to the subject.", "element": "Water" }
         ]
         },
 
         {
         "id": 12,
-        "question_text": "How do you prefer to connect with others in social situations?",
+        "question_text": "How do you connect with others in social situations?",
         "options": [
             { "option_text": "Through passionate conversations and shared experiences.", "element": "Fire" },
-            { "option_text": "Through practical help, support, and reliability.", "element": "Earth" },
-            { "option_text": "Through stimulating discussions, debates, and intellectual exchanges.", "element": "Air" },
-            { "option_text": "Through helping others, listening, and providing support.", "element": "Water" }
-        
+            { "option_text": "By offering practical help and support.", "element": "Earth" },
+            { "option_text": "Through intellectual discussions and debates.", "element": "Air" },
+            { "option_text": "By listening and offering emotional support.", "element": "Water" }
 
         ]
         },
         {
         "id": 13,
-        "question_text": "How do you handle your daily routines and responsibilities?",
+        "question_text": "How do you handle daily routines?",
         "options": [
-            { "option_text": "I like to tackle things with energy, but I can get bored if it becomes too repetitive.", "element": "Fire" },
-            { "option_text": "I’m steady and consistent, sticking to a routine that ensures everything gets done.", "element": "Earth" },
-            { "option_text": "I prefer flexibility and variety in my daily tasks to keep things interesting.", "element": "Air" },
-            { "option_text": "I go with the flow, adjusting my routine based on how I feel each day.", "element": "Water" }
+            { "option_text": "I tackle tasks with energy but get bored with repetition.", "element": "Fire" },
+            { "option_text": "I’m steady and consistent, sticking to a routine.", "element": "Earth" },
+            { "option_text": "I prefer flexibility and variety to keep things interesting.", "element": "Air" },
+            { "option_text": "I go with the flow, adjusting my routine as needed.", "element": "Water" }
         ]
         },
         {
         "id": 14,
-        "question_text": "How do you approach personal growth and self-improvement?",
+        "question_text": "How do you approach personal growth?",
         "options": [
             { "option_text": "I seek out new challenges and experiences to push my limits and expand my horizons.", "element": "Fire" },
-            { "option_text": "I focus on building a strong foundation and improving my skills through practice and discipline.", "element": "Earth" },
-            { "option_text": "I explore new or different ideas to broaden my understanding.", "element": "Air" },
+            { "option_text": "I build a strong foundation and improve my skills through practice.", "element": "Earth" },
+            { "option_text": "I explore new ideas to broaden my understanding.", "element": "Air" },
             { "option_text": "I reflect on my past experiences, and inner world to grow and heal.", "element": "Water" }
         
         ]
@@ -138,7 +135,7 @@
 
         {
         "id": 2,
-        "question_text": "Which of the following is most likely to derail your plans?",
+        "question_text": "What is most likely to ruin your plans?",
         "options": [
             { "option_text": "Losing interest if things aren’t happening fast enough.", "element": "Fire" },
             { "option_text": "Sticking to my plans too rigidly, even when they’re not working.", "element": "Earth" },

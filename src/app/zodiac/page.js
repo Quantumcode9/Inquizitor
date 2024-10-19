@@ -132,12 +132,15 @@ const handleFeedback = async (choice) => {
 
 return (
     <div
-    ref={containerRef} 
-    className="p-6 bg-cardBackground rounded-lg shadow-md max-w-[50rem] mx-auto mt-20"
-    >   
+    ref={containerRef}
+    className="p-6 	bg-cardBackground rounded-lg shadow-md max-w-[50rem] mx-auto mt-16 overflow-auto relative"
+  >
     <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-        Zodiac Quiz <small>{stage === 1 ? 'Part 1/2' : 'Part 2/2'}</small>
+        Zodiac Quiz
     </h2>
+    <span className="block text-gray-400 text-sm font-medium">
+    Question {stage === 1 ? currentQuestionIndex + 1 : currentAdditionalQuestionIndex + 15}
+        </span>
     <div className="w-full bg-gray-200 rounded-full h-4 mb-6">
     <div
         className="bg-blue-600 h-4 rounded-full transition-width duration-300"
@@ -145,19 +148,17 @@ return (
         width: `${stage === 1
             ? ((currentQuestionIndex + 1) / 24) * 100
             : ((currentAdditionalQuestionIndex + 1 + 14) / 24) * 100}%`
+            
         }}
     ></div>
 </div>
 
     <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
     {stage === 1 && (
-<form onSubmit={handleSubmit}>
+<div>
     {questions.length > 0 && questions[currentQuestionIndex] ? (
     <div className="mb-6">
-     
-        <span className="block text-gray-400 text-sm font-medium">
-        Question {currentQuestionIndex + 1}
-        </span>
+
         <h3 className="text-lg font-semibold mb-4">
         {questions[currentQuestionIndex].question_text}
         </h3>
@@ -210,22 +211,21 @@ return (
         </button>
     ) : (
         <button
-        type="submit"
+        type="button"
+        onClick={handleSubmit}
         className="mt-4 px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
         >
         Submit
         </button>
     )}
     </div>
-</form>
+</div>
 )}
 {stage === 2 && (
-<form onSubmit={handleFinalSubmit}>
+<div>
     {additionalQuestions.length > 0 && additionalQuestions[currentAdditionalQuestionIndex] ? (
     <div key={currentAdditionalQuestionIndex} className="space-y-4">
-        <span className="block text-gray-400 text-sm font-medium">
-        Question {currentAdditionalQuestionIndex + 15}
-        </span>
+    
         <label className="block text-lg font-semibold">
         {additionalQuestions[currentAdditionalQuestionIndex].question}
         </label>
@@ -291,7 +291,7 @@ return (
         </button>
     )}
     </div>
-</form>
+</div>
 )}
 
 {stage === 3 && guessedZodiac && (

@@ -2,201 +2,174 @@
 {
     "Water": [
       {
-        "question": "How do you approach decision-making in your personal life?",
+        "question": "How do you make decisions in your personal life?",
         "responses": [
-          { "option_text": "I trust my intuition and follow my heart, seeking emotional resonance.", "sign": "Pisces" },
-          { "option_text": "I weigh the pros and cons, considering the impact on myself and others.", "sign": "Virgo" },
-          { "option_text": "I trust my gut feelings but prefer to keep my decisions private until I’m certain.", "sign": "Scorpio" }
+          { "option_text": "I trust my intuition and follow my heart.", "sign": "Pisces" },
+          { "option_text": "I weigh pros and cons, considering the impact on others.", "sign": "Virgo" },
+          { "option_text": "I trust my gut but keep decisions private until I’m sure.", "sign": "Scorpio" }
         ]
       },
       {
-        "question": "What role do you usually play in a group setting?",
+        "question": "What role do you play in a group?",
         "responses": [
-          { "option_text": "I am a visionary, inspiring new ideas and possibilities.", "sign": "Pisces" },
-          { "option_text": "I prefer to lead from behind the scenes, driving transformation and strategy", "sign": "Scorpio" },
-          { "option_text": "I am the empathetic listener, offering support and understanding to others.", "sign": "Cancer" }
+          { "option_text": "I’m a visionary, inspiring new ideas.", "sign": "Pisces" },
+          { "option_text": "I lead from behind the scenes, driving strategy.", "sign": "Scorpio" },
+          { "option_text": "I’m the empathetic listener, offering support.", "sign": "Cancer" }
 
-        ]
-      },
-      {
-        "question": "How do you typically handle stress or difficult emotions?",
-        "responses": [
-          { "option_text": "I seek solace in creative pursuits, like writing or painting to express my feelings.", "sign": " Pisces" },
-          { "option_text": "I turn to loved ones for comfort and emotional support.", "sign": " Cancer" },
-          { "option_text": "I find peace in solitude, reflecting on my feelings and experiences.", "sign": " Scorpio" } 
         ]
       },
 
       {
-        "question": "When faced with conflict, how do you usually react?",
+        "question": "How do you react to conflict?",
         "responses": [
-          { "option_text": "I tend to avoid confrontation, focusing on protecting the emotions of those I care about.", "sign": "Cancer" },
-          { "option_text": "I prefer to confront issues head-on but keep my feelings close until I know the right moment.", "sign": "Scorpio" },
-          { "option_text": "I try to understand all perspectives and find a harmonious solution for everyone involved.", "sign": "Pisces" }
+          { "option_text": "I avoid conflict and seek harmony at all costs.", "sign ": "Cancer" },
+          { "option_text": "I confront issues head-on but keep my feelings close until I know the right moment.", "sign": "Scorpio " },
+          { "option_text": "I try to understand all perspectives and find a solution for everyone involved.", "sign": "Pisces" }
         ]
       },
       {
-        "question": "What drives your ambitions and long-term goals? ", 
+        "question": "What drives your ambitions and goals? ", 
         "responses": [
-          { "option_text": "My primary motivation is ensuring security and comfort for my loved ones.", "sign": "Cancer" },
-          { "option_text": "The pursuit of personal growth and self-discovery motivates me.", "sign": "Scorpio" },
-          { "option_text": "The need to express myself creatively and authentically fuels my ambitions.", "sign": "Pisces" }
+        { "option_text": "Ensuring security and comfort for loved ones.", "sign": "Cancer" },
+        { "option_text": "Personal growth and self-discovery.", "sign": "Scorpio" },
+        { "option_text": "Expressing myself creatively and authentically.", "sign": "Pisces" }
         
         ]
       },
       {
 
-        "question": " How do you react to emotional stress?",
+        "question": "How do you handle stress or difficult emotions?",
         "responses": [
-          { "option_text": "I go inward and seek creative outlets and self-expression to process my feelings.", "sign": " Pisces" },
-          { "option_text": "I retreat into my safe space, and turn to friend and family for support and guidance.", "sign": " Cancer" },
-          { "option_text": "I hold my emotions in, processing them privately until I’m ready to take action.", "sign": " Scorpio" }
+          { "option_text": "I seek creative outlets to process my feelings.", "sign": "Pisces" },
+          { "option_text": "I retreat and turn to friends and family for support.", "sign": "Cancer" },
+          { "option_text": "I process emotions privately until I’m ready to act.", "sign": "Scorpio" }
         ]
       },
 
       {
-        "question": "What brings you the most joy and fulfillment in life?",
+        "question": "How do you handle change or life transitions?",
         "responses": [
-          { "option_text": "Meaningful connections with others and shared emotional experiences.", "sign": "Cancer" },
-          { "option_text": "Personal growth and self-awareness, learning more about myself and the world.", "sign": "Scorpio" },
-          { "option_text": "Creative expression and the freedom to be myself authentically.", "sign": "Pisces" }
-        ]
-      },
-
-      {
-        "question": "How do you approach change or major life transitions?",
-        "responses": [
-          { "option_text": "I go with the flow, trusting that things will unfold as they should, even if it’s emotional.", "sign": "Pisces" },
-          { "option_text": "I approach change with caution, preferring to take my time to process and adapt to new circumstances", "sign": "Cancer" },
-          { "option_text": "I welcome change as a chance to evolve and deepen my understanding of myself and others ", "sign": "Scorpio " }
+          { "option_text": "I go with the flow, trusting things will unfold.", "sign": "Pisces" },
+          { "option_text": "I take my time to process and adapt to change.", "sign": "Cancer" },
+          { "option_text": "I welcome change as a chance to evolve.", "sign": "Scorpio" }
         ]
       },
         {
 
         "question": "What is your approach to building relationships?",
         "responses": [
-          { "option_text": "I am deeply empathetic and prioritize emotional connection in my relationships", "sign": "Cancer" },
-          { "option_text": "I value trust and loyalty, and I am fiercely protective of those I care about.", "sign": "Scorpio " },
-          { "option_text": "I connect through empathy and understanding, often sensing others’ emotions intuitively.", "sign": "Pisces" }
+          { "option_text": "I prioritize emotional connection and understanding.", "sign": "Cancer" },
+          { "option_text": "I value trust and loyalty, and protect those I care about.", "sign": "Scorpio" },
+          { "option_text": "I connect through empathy, often sensing others’ emotions.", "sign": "Pisces" }
 
         ]
       }, 
 
       {
-        "question": "What role do you take in group dynamics or social settings?",
-        "responses": [
-          { "option_text": "I tend to be the caregiver, offering emotional support and a listening ear.", "sign": "Cancer" },
-          { "option_text": "I am the peacemaker, striving to maintain harmony and diffuse tension.", "sign": "Scorpio" },
-          { "option_text": "I am the creative visionary, inspiring new ideas and possibilities.", "sign": "Pisces" }
-        ]
-      },
-
-      {
         "question": "How do you cope with disappointment or setbacks?",
         "responses": [
-          { "option_text": "“I reflect on my emotions and trust that things will improve, often finding solace in creative pursuits.”", "sign": "Pisces" },
-          { "option_text": "I take time to retreat and emotionally heal, leaning on friend and family for support.", "sign": "Cancer" },
-          { "option_text": "I process the disappointment privately, and use it as motivation to come back stronger.", "sign": "Scorpio"
-          }
+          { "option_text": "I reflect and trust things will improve, often finding solace in creativity.", "sign": "Pisces" },
+          { "option_text": "I retreat to heal and rely on family and friends for support.", "sign": "Cancer" },
+          { "option_text": "I process it privately and use it as motivation to come back stronger.", "sign": "Scorpio" }
         ]
       },
       {
         "question": "What qualities do you value most in friendships?",
         "responses": [
-          { "option_text": "I value loyalty and emotional support, seeking friends who understand and accept me.", "sign": "Cancer" },
-          { "option_text": "I appreciate honesty and depth, valuing friends who challenge and inspire me.", "sign": "Scorpio" },
-          { "option_text": "I appreciate friends who are empathetic, open-minded, and emotionally understanding.", "sign": "Pisces" }
+          { "option_text": "I value loyalty and emotional support from those who accept me.", "sign": "Cancer" },
+          { "option_text": "I appreciate honesty and depth, valuing friends who inspire me.", "sign": "Scorpio" },
+          { "option_text": "I value empathetic and open-minded friends.", "sign": "Pisces" }
         ]
       },
       {
-        "question": "What brings you the most joy and fulfillment in life?",
+        "question": "What brings you the most joy and fulfillment?",
         "responses": [
-          { "option_text":  "Meaningful connections with others and shared emotional experiences.",  "sign": "Cancer" },
-          { "option_text": "Personal growth and self-awareness, learning more about myself and the world.", "sign": "Scorpio" },
-          { "option_text": "Creative expression and the freedom to be myself authentically.", "sign": "Pisces" }
+          { "option_text": "Meaningful connections and shared emotional experiences.", "sign": "Cancer" },
+          { "option_text": "Personal growth and self-awareness.", "sign": "Scorpio" },
+          { "option_text": "Creative expression and being my authentic self.", "sign": "Pisces" }
         ]
       }
     
     ],
     "Fire": [
       {
-        "question": "How do you handle obstacles in your path?",
+        "question": "How do you handle obstacles?",
         "responses": [
-          { "option_text": "I confront them head-on with energy and determination, wasting no time.", "sign": "Aries" },
-          { "option_text": "I face challenges with confidence, knowing I can turn them into opportunities to shine.", "sign": "Leo" },
-          { "option_text": "I see obstacles as opportunities for growth and new experiences, learning something from each one.", "sign": "Sagittarius" }
+          { "option_text": "I confront them head-on with energy and determination.", "sign": "Aries" },
+          { "option_text": "I face challenges confidently, turning them into opportunities.", "sign": "Leo" },
+          { "option_text": "I see obstacles as chances for growth and new experiences.", "sign": "Sagittarius" }
         ]
       },
       {
-        "question": "How do you approach leadership roles?",
+        "question": "How do you approach leadership?",
         "responses": [
-          { "option_text": "I take charge naturally and push for immediate action, leading with bold energy.", "sign": "Aries" },
-          { "option_text": "I lead by inspiring others with my charisma and creative vision, seeking recognition for my efforts.", "sign": "Leo" },
-          { "option_text": "I lead by encouraging exploration and open-mindedness, bringing new perspectives to the table.", "sign": "Sagittarius" }
+          { "option_text": "I take charge and push for immediate action with bold energy.", "sign": "Aries" },
+          { "option_text": "I lead by inspiring others with charisma and vision.", "sign": "Leo" },
+          { "option_text": "I encourage exploration and open-mindedness as a leader.", "sign": "Sagittarius" }
         ]
       },
       {
-        "question": "How do you react to sudden changes or unexpected events?",
+        "question": "How do you react to sudden changes?",
         "responses": [
-          { "option_text": "I jump into action quickly, ready to adapt and overcome whatever comes my way.", "sign": "Aries" },
-          { "option_text": "I stay confident and remain in control, using the moment to showcase my strength and creativity.", "sign": "Leo" },
-          { "option_text": "I see change as an exciting opportunity for a new adventure, embracing the unknown.", "sign": "Sagittarius" }
+          { "option_text": "I quickly adapt and overcome whatever comes my way.", "sign": "Aries" },
+          { "option_text": "I stay confident and use the moment to showcase my creativity.", "sign": "Leo" },
+          { "option_text": "I embrace change as an exciting opportunity for adventure.", "sign": "Sagittarius" }
         ]
       },
       {
         "question": "What drives your ambition?",
         "responses": [
-          { "option_text": "I’m driven by the thrill of competition and the desire to win.", "sign": "Aries" },
-          { "option_text": "I’m motivated by recognition, praise, and the desire to be admired for my talents.", "sign": "Leo" },
-          { "option_text": "I’m driven by my thirst for knowledge, adventure, and exploring the world.", "sign": "Sagittarius" }
+          { "option_text": "I’m driven by the thrill of competition and winning.", "sign": "Aries" },
+          { "option_text": "I’m motivated by recognition and admiration for my talents.", "sign": "Leo" },
+          { "option_text": "I’m driven by a thirst for knowledge and adventure.", "sign": "Sagittarius" }
         ]
       },
       {
-        "question": "How do you express creativity?",
+        "question": "How do you express yourself creativity?",
         "responses": [
-          { "option_text": "I express creativity through bold actions and daring projects that push boundaries.", "sign": "Aries" },
-          { "option_text": "I express creativity through artistic endeavors and dramatic flair, seeking to captivate and inspire.", "sign": "Leo" },
-          { "option_text": "I express creativity by exploring new cultures, philosophies, and ideas, often sharing them through storytelling or teaching.", "sign": "Sagittarius" }
+          { "option_text": "I express creativity through bold actions and daring projects.", "sign": "Aries" },
+          { "option_text": "I express creativity through artistic flair, seeking to inspire.", "sign": "Leo" },
+          { "option_text": "I explore new ideas and cultures, sharing them through storytelling.", "sign": "Sagittarius" }
         ]
       },
       {
         "question": "What role do you play in social settings?",
         "responses": [
-          { "option_text": "I’m the one who takes charge, leading the group and pushing for excitement and action.", "sign": "Aries" },
-          { "option_text": "I’m the center of attention, bringing energy, charm, and fun to any gathering.", "sign": "Leo" },
-          { "option_text": "I’m the one encouraging others to try new things and think outside the box, always sharing my latest adventures.", "sign": "Sagittarius" }
+          { "option_text": "I take charge, leading the group and pushing for action.", "sign": "Aries" },
+          { "option_text": "I’m the center of attention, bringing energy and charm.", "sign": "Leo" },
+          { "option_text": "I encourage others to try new things and share my adventures.", "sign": "Sagittarius" }
         ]
       },
       {
         "question": "How do you make decisions in high-pressure situations?",
         "responses": [
-          { "option_text": "I make decisions quickly and instinctively, trusting my ability to handle whatever happens.", "sign": "Aries" },
-          { "option_text": "I stay composed and confident, making decisions that will maintain my status and reputation.", "sign": "Leo" },
-          { "option_text": "I consider the bigger picture and how the decision aligns with my personal quest for truth and growth.", "sign": "Sagittarius" }
+          { "option_text": "I make quick, instinctive decisions, trusting I can handle it.", "sign": "Aries" },
+          { "option_text": "I stay composed, making decisions to maintain my status.", "sign": "Leo" },
+          { "option_text": "I consider the bigger picture and how it aligns with my growth.", "sign": "Sagittarius" }
         ]
       },
       {
         "question": "How do you approach romantic relationships?",
         "responses": [
-          { "option_text": "I pursue relationships with passion and enthusiasm, always looking to keep things exciting.", "sign": "Aries" },
-          { "option_text": "I approach romance with confidence and generosity, wanting to be adored and admired by my partner.", "sign": "Leo" },
-          { "option_text": "I seek relationships that offer freedom and intellectual stimulation, valuing adventure and shared experiences.", "sign": "Sagittarius" }
+          { "option_text": "I pursue romance with passion and enthusiasm, keeping things exciting.", "sign": "Aries" },
+          { "option_text": "I approach romance with confidence, seeking admiration and generosity.", "sign": "Leo" },
+          { "option_text": "I seek relationships that offer freedom and intellectual stimulation.", "sign": "Sagittarius" }
         ]
       },
       {
         "question": "How do you deal with failure?",
         "responses": [
-          { "option_text": "I don’t dwell on failure—I immediately get back up and try again with even more energy.", "sign": "Aries" },
-          { "option_text": "I turn failure into an opportunity to prove myself again, using it to fuel my next success.", "sign": "Leo" },
-          { "option_text": "I see failure as a learning experience, something that adds depth to my journey and knowledge.", "sign": "Sagittarius" }
+          { "option_text": "I don’t dwell on failure—I get back up and try again with more energy.", "sign": "Aries" },
+          { "option_text": "I turn failure into an opportunity to prove myself and fuel my next success.", "sign": "Leo" },
+          { "option_text": "I see failure as a learning experience that adds depth to my journey.", "sign": "Sagittarius" }
         ]
       },
       {
-        "question": "What qualities do you value most in your friends?",
+        "question": "What qualities do you value most in friends?",
         "responses": [
-          { "option_text": "Friends who are just as bold and action-oriented as I am, always ready for the next adventure.", "sign": "Aries" },
-          { "option_text": "Friends who appreciate my leadership and offer me the admiration and loyalty I give in return.", "sign": "Leo" },
-          { "option_text": "Friends who are open-minded, adventurous, and willing to explore new ideas and experiences with me.", "sign": "Sagittarius" }
+          { "option_text": "Friends who are bold and ready for the next adventure.", "sign": "Aries" },
+          { "option_text": "Friends who appreciate my leadership and offer loyalty.", "sign": "Leo" },
+          { "option_text": "Friends who are open-minded and adventurous.", "sign": "Sagittarius" }
         ]
       }
 
@@ -206,164 +179,164 @@
       {
         "question": "How do you approach long-term planning?",
         "responses": [
-          { "option_text": "I take my time, focusing on security and building something that will last, step by step.", "sign": "Taurus" },
-          { "option_text": "I break down every detail, ensuring nothing is overlooked before committing to a plan.", "sign": "Virgo" },
-          { "option_text": "I plan methodically, always with my end goal in sight and taking practical steps to reach it.", "sign": "Capricorn" }
+          { "option_text": "I focus on security and build step by step.", "sign": "Taurus" },
+          { "option_text": "I break down every detail before committing.", "sign": "Virgo" },
+          { "option_text": "I plan methodically, keeping my end goal in sight.", "sign": "Capricorn" }
         ]
       },
       {
-        "question": "What’s your approach to maintaining stability in your life?",
+        "question": "What’s your approach to maintaining stability?",
         "responses": [
-          { "option_text": "I surround myself with the things I value—comfort, routine, and financial security are my top priorities.", "sign": "Taurus" },
-          { "option_text": "I maintain stability by keeping everything organized and running efficiently, whether at work or home.", "sign": "Virgo" },
-          { "option_text": "I create stability through discipline and by setting long-term goals that ensure success and structure.", "sign": "Capricorn" }
+          { "option_text": "I prioritize comfort, routine, and financial security.", "sign": "Taurus" },
+          { "option_text": "I keep everything organized and efficient.", "sign": "Virgo" },
+          { "option_text": "I create stability through discipline and long-term goals.", "sign": "Capricorn" }
         ]
       },
       {
         "question": "How do you handle tough decisions?",
         "responses": [
-          { "option_text": "I carefully weigh all the practical options and move forward only when I’m confident in the outcome.", "sign": "Taurus" },
-          { "option_text": "I analyze every possible angle, ensuring I’ve thought through every consequence before choosing.", "sign": "Virgo" },
-          { "option_text": "I consider how the decision aligns with my long-term goals, focusing on what will bring the best results over time.", "sign": "Capricorn" }
+          { "option_text": "I weigh practical options and move forward when confident.", "sign": "Taurus" },
+          { "option_text": "I analyze every angle before choosing.", "sign": "Virgo" },
+          { "option_text": "I focus on how the decision aligns with long-term goals.", "sign": "Capricorn" }
         ]
       },
       {
-        "question": "What motivates you to keep going when things get tough?",
+        "question": "What motivates you when things get tough?",
         "responses": [
-          { "option_text": "Knowing that the hard work will pay off in creating a life of comfort and security motivates me.", "sign": "Taurus" },
-          { "option_text": "I’m driven by the need to see things done right, knowing my attention to detail will make a difference.", "sign": "Virgo" },
-          { "option_text": "I stay focused on my ambitions, knowing that discipline and perseverance will get me to the top.", "sign": "Capricorn" }
+          { "option_text": "The promise of comfort and security keeps me going.", "sign": "Taurus" },
+          { "option_text": "Knowing my attention to detail will make a difference.", "sign": "Virgo" },
+          { "option_text": "My ambitions and knowing perseverance leads to success.", "sign": "Capricorn" }
         ]
       },
       {
         "question": "How do you approach problem-solving?",
         "responses": [
-          { "option_text": "I rely on practical solutions and trust my steady nature to fix the problem at its root.", "sign": "Taurus" },
-          { "option_text": "I break the problem down into smaller parts, analyzing it until I find the most efficient solution.", "sign": "Virgo" },
-          { "option_text": "I approach problems strategically, considering the long-term impact and taking a step-by-step approach.", "sign": "Capricorn" }
+          { "option_text": "I rely on practical solutions and my steady nature.", "sign": "Taurus" },
+          { "option_text": "I break problems into smaller parts to find efficient solutions.", "sign": "Virgo" },
+          { "option_text": "I take a step-by-step approach with the long-term impact in mind.", "sign": "Capricorn" }
         ]
       },
       {
         "question": "How do you handle financial matters?",
         "responses": [
-          { "option_text": "I’m cautious and patient, always focusing on saving and investing for a secure future.", "sign": "Taurus" },
-          { "option_text": "I keep everything organized, tracking every expense and making sure I’m maximizing value.", "sign": "Virgo" },
-          { "option_text": "I’m focused on building long-term wealth through strategic investments and disciplined financial planning.", "sign": "Capricorn" }
+          { "option_text": "I focus on saving and investing for the future.", "sign": "Taurus" },
+          { "option_text": "I track expenses and ensure I’m getting the most value.", "sign": "Virgo" },
+          { "option_text": "I focus on long-term wealth through strategic investments.", "sign": "Capricorn" }
         ]
       },
       {
         "question": "What role do you take in group projects?",
         "responses": [
-          { "option_text": "I’m the steady force, making sure everything stays on track and gets done in a practical, reliable way.", "sign": "Taurus" },
-          { "option_text": "I’m the detail-oriented one, analyzing all aspects of the project and ensuring the highest quality of work.", "sign": "Virgo" },
-          { "option_text": "I naturally take on the leadership role, setting clear goals and keeping everyone focused on the final outcome.", "sign": "Capricorn" }
+          { "option_text": "I’m the steady force, keeping everything on track.", "sign": "Taurus" },
+          { "option_text": "I focus on details, ensuring the highest quality of work.", "sign": "Virgo" },
+          { "option_text": "I take on the leadership role, setting clear goals.", "sign": "Capricorn" }
         ]
       },
       {
         "question": "How do you approach health and wellness?",
         "responses": [
-          { "option_text": "I value consistency and comfort, focusing on a balanced lifestyle that feels good and keeps me grounded.", "sign": "Taurus" },
-          { "option_text": "I’m always fine-tuning my routine, making sure every detail of my health plan is optimized for the best results.", "sign": "Virgo" },
-          { "option_text": "I approach health with discipline, seeing it as essential to maintaining the stamina I need for long-term success.", "sign": "Capricorn" }
+          { "option_text": "I focus on balance and consistency in my lifestyle.", "sign": "Taurus" },
+          { "option_text": "I fine-tune my routine for the best results.", "sign": "Virgo" },
+          { "option_text": "I see health as essential for maintaining long-term stamina.", "sign": "Capricorn" }
         ]
       },
       {
         "question": "How do you express loyalty in relationships?",
         "responses": [
-          { "option_text": "I show loyalty through my steady presence and reliability, always being there when my loved ones need me.", "sign": "Taurus" },
-          { "option_text": "I’m loyal by being attentive and thoughtful, showing that I truly care through my actions and support.", "sign": "Virgo" },
-          { "option_text": "I’m loyal by staying committed to the long-term, always supporting my partner’s goals and ambitions.", "sign": "Capricorn" }
+          { "option_text": "I show loyalty through my steady presence and reliability.", "sign": "Taurus" },
+          { "option_text": "I’m attentive and thoughtful, showing I care through actions.", "sign": "Virgo" },
+          { "option_text": "I stay committed to the long-term, supporting my partner’s goals.", "sign": "Capricorn" }
         ]
       },
       {
-        "question": "How do you handle your personal growth and development?",
+        "question": "How do you handle personal growth and development?",
         "responses": [
-          { "option_text": "I focus on building a life of comfort and security, slowly and steadily growing toward my ideal.", "sign": "Taurus" },
-          { "option_text": "I’m constantly fine-tuning myself, always striving for improvement in every aspect of life.", "sign": "Virgo" },
-          { "option_text": "I’m driven to climb the ladder of success, setting goals and working diligently to achieve personal mastery.", "sign": "Capricorn" }
+          { "option_text": "I build slowly and steadily toward comfort and security.", "sign": "Taurus" },
+          { "option_text": "I constantly fine-tune and strive for improvement.", "sign": "Virgo" },
+          { "option_text": "I set goals and work diligently to achieve personal mastery.", "sign": "Capricorn" }
         ]
       }
 
     ],
     "Air": [
       {
-        "question": "How do you approach making decisions when faced with multiple options?",
+        "question": "How do you approach making decisions?",
         "responses": [
-          { "option_text": "I love exploring different possibilities, often jumping from one idea to the next until something clicks.", "sign": "Gemini" },
-          { "option_text": "I carefully weigh all perspectives, aiming to make a fair and balanced choice, but sometimes I struggle to decide.", "sign": "Libra" },
-          { "option_text": "I lean toward the most forward-thinking or unconventional option, valuing ideas that push boundaries.", "sign": "Aquarius" }
+          { "option_text": "I explore different possibilities until something clicks.", "sign": "Gemini" },
+          { "option_text": "I weigh all perspectives, aiming for a fair choice but sometimes struggle to decide.", "sign": "Libra" },
+          { "option_text": "I prefer forward-thinking, unconventional ideas that push boundaries.", "sign": "Aquarius" }
         ]
       },
       {
-        "question": "What energizes you the most in a social setting?",
+        "question": "What energizes you most in a social setting?",
         "responses": [
-          { "option_text": "Engaging in fast-paced conversations, exchanging ideas, and discovering something new about people.", "sign": "Gemini" },
-          { "option_text": "Creating harmony and bringing people together through light-hearted charm and thoughtful communication.", "sign": "Libra" },
-          { "option_text": "Connecting with like-minded people who are passionate about making a difference and discussing visionary ideas.", "sign": "Aquarius" }
+          { "option_text": "Fast-paced conversations, exchanging ideas, and learning about people.", "sign": "Gemini" },
+          { "option_text": "Creating harmony and bringing people together through thoughtful communication.", "sign": "Libra" },
+          { "option_text": "Connecting with like-minded people passionate about visionary ideas.", "sign": "Aquarius" }
         ]
       },
       {
         "question": "How do you handle conflicts in relationships?",
         "responses": [
-          { "option_text": "I try to keep things light and shift the conversation, but I’m not afraid to change my mind if new information comes up.", "sign": "Gemini" },
-          { "option_text": "I’ll do everything I can to smooth things over, making sure everyone feels heard and at peace.", "sign": "Libra" },
-          { "option_text": "I look for innovative solutions that solve the root cause, often thinking outside the box.", "sign": "Aquarius" }
+          { "option_text": "I keep it light, but I’m open to changing my mind if new information arises.", "sign": "Gemini" },
+          { "option_text": "I smooth things over, making sure everyone feels heard and at peace.", "sign": "Libra" },
+          { "option_text": "I look for innovative solutions, thinking outside the box.", "sign": "Aquarius" }
         ]
       },
       {
         "question": "How do you approach learning new things?",
         "responses": [
-          { "option_text": "I dive into a topic with enthusiasm, absorbing information quickly and moving on when something else grabs my attention.", "sign": "Gemini" },
-          { "option_text": "I appreciate learning through balanced perspectives, especially when it helps me connect with others better.", "sign": "Libra" },
-          { "option_text": "I seek out revolutionary or future-forward ideas, always aiming to challenge traditional ways of thinking.", "sign": "Aquarius" }
+          { "option_text": "I dive in enthusiastically but move on quickly when something else grabs my attention.", "sign": "Gemini" },
+          { "option_text": "I enjoy balanced perspectives that help me connect with others.", "sign": "Libra" },
+          { "option_text": "I seek revolutionary ideas that challenge traditional thinking.", "sign": "Aquarius" }
         ]
       },
       {
         "question": "What’s your role in group projects?",
         "responses": [
-          { "option_text": "I’m the one sparking lively discussions, throwing out different ideas, and keeping everyone engaged.", "sign": "Gemini" },
-          { "option_text": "I make sure everyone’s voice is heard and strive to create a harmonious, collaborative environment.", "sign": "Libra" },
-          { "option_text": "I provide innovative insights and like to steer the project toward ideas that are progressive and future-focused.", "sign": "Aquarius" }
+          { "option_text": "I spark discussions, throw out ideas, and keep everyone engaged.", "sign": "Gemini" },
+          { "option_text": "I ensure everyone’s voice is heard and create a collaborative environment.", "sign": "Libra" },
+          { "option_text": "I provide innovative insights and guide the project toward progressive ideas.", "sign": "Aquarius" }
         ]
       },
       {
         "question": "How do you approach personal growth?",
         "responses": [
-          { "option_text": "I grow by exploring new ideas, constantly shifting and evolving based on what interests me at the moment.", "sign": "Gemini" },
-          { "option_text": "I seek balance and harmony in all aspects of life, focusing on self-improvement in ways that enhance my relationships.", "sign": "Libra" },
-          { "option_text": "I focus on personal growth by questioning norms and striving to live authentically in line with my ideals.", "sign": "Aquarius" }
+          { "option_text": "I grow by exploring new ideas and shifting based on my current interests.", "sign": "Gemini" },
+          { "option_text": "I seek balance and focus on self-improvement in ways that enhance relationships.", "sign": "Libra" },
+          { "option_text": "I focus on growth by questioning norms and living authentically.", "sign": "Aquarius" }
         ]
       },
       {
         "question": "How do you handle big life changes?",
         "responses": [
-          { "option_text": "I adapt quickly, finding excitement in new situations and shifting my focus to what’s most interesting.", "sign": "Gemini" },
-          { "option_text": "I try to maintain balance and harmony during change, making sure everything feels fair and manageable.", "sign": "Libra" },
-          { "option_text": "I see change as an opportunity to break away from convention and embrace something radically new.", "sign": "Aquarius" }
+          { "option_text": "I adapt quickly, finding excitement in new situations.", "sign": "Gemini" },
+          { "option_text": "I maintain balance during change, ensuring things feel fair and manageable.", "sign": "Libra" },
+          { "option_text": "I see change as a chance to break from convention and embrace something new.", "sign": "Aquarius" }
         ]
       },
       {
-        "question": "What kind of conversations excite you the most?",
+        "question": "What kind of conversations excite you most?",
         "responses": [
-          { "option_text": "I love conversations that jump from topic to topic, always uncovering something new or unexpected.", "sign": "Gemini" },
-          { "option_text": "I’m excited by conversations that bring people together, finding common ground and mutual understanding.", "sign": "Libra" },
-          { "option_text": "I’m thrilled by deep discussions about innovative ideas, social change, and how we can shape the future.", "sign": "Aquarius" }
+          { "option_text": "I enjoy conversations that jump from topic to topic, uncovering something new.", "sign": "Gemini" },
+          { "option_text": "I’m excited by conversations that bring people together and find common ground.", "sign": "Libra" },
+          { "option_text": "I love deep discussions about innovative ideas and shaping the future.", "sign": "Aquarius" }
         ]
       },
       {
-        "question": "How do you balance your social life and personal time?",
+        "question": "How do you balance social life and personal time?",
         "responses": [
-          { "option_text": "I thrive on social interaction but can easily shift gears when I need some personal time to recharge.", "sign": "Gemini" },
-          { "option_text": "I aim to keep a harmonious balance, making sure I give equal attention to my social circles and personal needs.", "sign": "Libra" },
-          { "option_text": "I enjoy socializing but need time alone to focus on my ideas and projects, often preferring quality over quantity.", "sign": "Aquarius" }
+          { "option_text": "I thrive on social interaction but can easily switch to personal time when needed.", "sign": "Gemini" },
+          { "option_text": "I aim for balance, giving equal attention to social circles and personal needs.", "sign": "Libra" },
+          { "option_text": "I enjoy socializing but need time alone to focus on my ideas-quality over quantity.", "sign": "Aquarius" }
         ]
       },
       {
-        "question": "What qualities do you value most in a partner or close friend?",
+        "question": "What qualities do you value most in a partner or friend?",
         "responses": [
-          { "option_text": "I value someone who can keep up with my curiosity and enjoy playful, dynamic conversations.", "sign": "Gemini" },
-          { "option_text": "I value someone who brings balance to my life, is charming, and can help maintain harmony.", "sign": "Libra" },
-          { "option_text": "I value someone who respects my individuality, supports my ideals, and shares my vision for the future.", "sign": "Aquarius" }
+          { "option_text": "I value someone who can keep up with my curiosity and enjoy dynamic conversations.", "sign": "Gemini" },
+          { "option_text": "I value someone who brings balance, charm, and helps maintain harmony.", "sign": "Libra" },
+          { "option_text": "I value someone who respects my individuality and shares my vision for the future.", "sign": "Aquarius" }
         ]
       }
 
