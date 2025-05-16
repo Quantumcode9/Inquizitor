@@ -175,7 +175,7 @@ export default function EnneagramQuiz() {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-cardBackground mt-24 rounded-lg shadow-lg max-w-[60rem] mx-auto p-14 text-center space-y-8">
         <h2 className="text-4xl font-extrabold text-gray-800 dark:text-gray-200">
-          Personalizing your quiz...
+          Personalizing your quiz... The questions will get harder!
         </h2>
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"></div>
       </div>
@@ -187,124 +187,200 @@ export default function EnneagramQuiz() {
     stage === 1 ? currentQuestionIndex + 1 : 9 + currentQuestionIndex + 1; 
 
   return (
-    <div className="p-6 bg-cardBackground rounded-lg shadow-md max-w-[50rem] mx-auto mt-20">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-        Enneagram Quiz {stage === 1 ? 'Part 1/2' : 'Part 2/2'}
-      </h2>
-      <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
-
-      {/* Progress Bar */}
-      <div className="w-full bg-gray-200 rounded-full h-4 mb-6">
-        <div
-          className="bg-blue-600 h-4 rounded-full transition-width duration-300"
-          style={{
-            width: `${(answeredQuestions / totalQuestions) * 100}%`,
-          }}
-        ></div>
-      </div>
-
-      {!feedbackPrompt ? (
-        <div className="space-y-10">
-          {statements.length > 0 && (
-            <div key={currentQuestionIndex} className="space-y-6">
-              <span className="block text-gray-400 text-sm font-medium">
-                Question {answeredQuestions} of {totalQuestions}
-              </span>
-              <label className="block text-lg sm:text-xl font-medium text-gray-900 dark:text-gray-50 leading-tight">
-                {statements[currentQuestionIndex].statement}
-              </label>
-              <div className="flex justify-between items-center gap-4 my-6">
-                <span className="text-gray-500 font-light text-xs sm:text-sm dark:text-gray-400">
-                  Strongly disagree
-                </span>
-                <div className="flex justify-center gap-4">
-                  {[1, 2, 3, 4, 5].map((value) => (
-                    <label
-                      key={value}
-                      className="flex flex-col items-center group cursor-pointer"
-                    >
-                      <input
-                        type="radio"
-                        name={`statement-${currentQuestionIndex}`}
-                        value={value}
-                        checked={answers[currentQuestionIndex]?.answer === value}
-                        onChange={(e) => handleChange(e, currentQuestionIndex)}
-                        className="sr-only peer"
-                      />
-                      <span className="block w-8 h-8 sm:w-10 sm:h-10 bg-gray-200 text-center rounded-full leading-8 sm:leading-10 text-sm sm:text-lg font-semibold text-gray-600 transition-all duration-300 peer-checked:bg-blue-500 peer-checked:text-white peer-focus:ring-4 peer-focus:ring-blue-300 group-hover:bg-blue-100 dark:bg-gray-700 dark:peer-checked:bg-blue-500 dark:peer-focus:ring-blue-500 dark:text-gray-300">
-                        {value}
-                      </span>
-                    </label>
-                  ))}
-                </div>
-                <span className="text-gray-500 font-light text-xs sm:text-sm dark:text-gray-400">
-                  Strongly agree
-                </span>
-              </div>
-              <hr className="border-t border-gray-300 dark:border-gray-600 my-4" />
-            </div>
-          )}
-
-          <div className="flex justify-between mt-4">
-          {currentQuestionIndex > 0 && (
-            <button
-              type="button"
-              onClick={handlePreviousQuestion}
-              disabled={currentQuestionIndex === 0}
-              className="mt-4 px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-            >
-              Previous
-            </button>
-          )}
-            {currentQuestionIndex < statements.length - 1 ? (
-              <button
-                type="button"
-                onClick={handleNextQuestion}
-                  className="mt-4 px-6 py-2 bg-accent text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200"
-              >
-                Next
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={handleSubmit}
-                className="mt-6 px-6 py-3 bg-accent text-white text-lg rounded-md hover:bg-blue-700 dark:hover:bg-blue-900 transition-colors duration-300"
-                disabled={loading}
-              >
-                {loading
-                  ? stage === 1
-                    ? 'Personalizing statements...'
-                    : 'Analyzing Results...'
-                  : stage === 1
-                  ? 'Submit & Continue'
-                  : 'Submit & Get Results'}
-              </button>
-            )}
+    <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="p-8 bg-cardBackground rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 mt-20 overflow-hidden relative">
+        {/* Header with gradient styling */}
+        <div className="text-center mb-8 relative">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500"></div>
+          <h2 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            Enneagram Quiz {stage === 1 ? 'Part 1/2' : 'Part 2/2'}
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 italic">Discover your core motivations</p>
+        </div>
+        
+        {/* Progress indicator */}
+        <div className="mb-8">
+          <div className="flex justify-between mb-2">
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+              Question {answeredQuestions} of {totalQuestions}
+            </span>
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+              {Math.round((answeredQuestions / totalQuestions) * 100)}% Complete
+            </span>
+          </div>
+          <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full "
+              style={{
+                width: `${(answeredQuestions / totalQuestions) * 100}%`,
+              }}
+            ></div>
           </div>
         </div>
-      ) : (
-        <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">
-          <h2 className="text-xl font-bold mb-2">Your Results</h2>
-          <p className="whitespace-pre-line">{analysis}</p>
-          <div className="mt-4">
-            <p className="text-gray-800 dark:text-gray-300">Do you agree with the analysis?</p>
-            <div className="space-x-2 mt-2">
+
+        <hr className="border-t border-gray-200 dark:border-gray-700 my-6" />
+
+        {!feedbackPrompt ? (
+          <div className="space-y-8">
+            {statements.length > 0 && (
+              <div key={currentQuestionIndex} className="space-y-6">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                  {statements[currentQuestionIndex].statement}
+                </h3>
+                
+                <div className="bg-gray-50 dark:bg-gray-900/30 p-6 rounded-xl">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-500 dark:text-gray-400 text-sm">Strongly disagree</span>
+                    <span className="text-gray-500 dark:text-gray-400 text-sm">Strongly agree</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center my-4">
+                    <div className="w-full flex justify-between">
+                      {[1, 2, 3, 4, 5].map((value) => (
+                        <label
+                          key={value}
+                          className="flex flex-col items-center group cursor-pointer"
+                        >
+                          <input
+                            type="radio"
+                            name={`statement-${currentQuestionIndex}`}
+                            value={value}
+                            checked={answers[currentQuestionIndex]?.answer === value}
+                            onChange={(e) => handleChange(e, currentQuestionIndex)}
+                            className="sr-only peer"
+                          />
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                            answers[currentQuestionIndex]?.answer === value
+                              ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white transform scale-110 shadow-md'
+                              : 'bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-400'
+                            }`}>
+                            <span className="text-lg font-medium">{value}</span>
+                          </div>
+                          
+                          {/* Line connecting circles */}
+                          {value < 5 && (
+                            <div className="absolute h-0.5 bg-gray-200 dark:bg-gray-700 w-full transform translate-x-1/2 top-6"></div>
+                          )}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-between mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
+              {currentQuestionIndex > 0 ? (
+                <button
+                  type="button"
+                  onClick={handlePreviousQuestion}
+                  className="px-6 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors flex items-center"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L4.414 9H17a1 1 0 110 2H4.414l5.293 5.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                  </svg>
+                  Previous
+                </button>
+              ) : (
+                <div></div> 
+              )}
+
+              {currentQuestionIndex < statements.length - 1 ? (
+                <button
+                  type="button"
+                  onClick={handleNextQuestion}
+                  disabled={!answers[currentQuestionIndex]?.answer}
+                  className={`px-6 py-2 rounded-lg flex items-center transition-colors ${
+                    answers[currentQuestionIndex]?.answer
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed dark:bg-gray-700 dark:text-gray-500'
+                  }`}
+                >
+                  Next
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H2a1 1 0 110-2h12.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={loading || !answers[currentQuestionIndex]?.answer}
+                  className={`px-6 py-2 rounded-lg flex items-center transition-colors ${
+                    (!loading && answers[currentQuestionIndex]?.answer)
+                      ? stage === 1 
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700'
+                        : 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed dark:bg-gray-700 dark:text-gray-500'
+                  }`}
+                >
+                  {loading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      {stage === 1 ? 'Personalizing...' : 'Analyzing...'}
+                    </>
+                  ) : (
+                    <>
+                      {stage === 1 ? 'Continue to Part 2' : 'Get Results'}
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H2a1 1 0 110-2h12.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="mt-8 space-y-6">
+          <div className="text-center">
+            <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center">
+              <span className="text-3xl font-bold text-white">{analysis.charAt(0)}</span>
+            </div>
+            <h2 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-teal-600">
+              {analysis.split('\n')[0]}
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-teal-500 mx-auto rounded-full my-4"></div>
+          </div>
+          
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
+            <div className="prose dark:prose-invert max-w-none">
+              {analysis.split('\n').slice(1).map((paragraph, i) => (
+                paragraph.trim() ? (
+                  <p key={i} className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    {paragraph}
+                  </p>
+                ) : null
+              ))}
+            </div>
+          </div>
+          
+          <div className="mt-8 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700 text-center">
+            <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
+              Does this describe you accurately?
+            </h3>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={() => handleFeedback('yes')}
-                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 dark:bg-green-700 dark:hover:bg-green-800"
+                className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-colors duration-300" 
               >
                 Yes
               </button>
               <button
                 onClick={() => handleFeedback('no')}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 dark:bg-red-700 dark:hover:bg-red-800"
+                className="px-6 py-3 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-lg hover:from-red-600 hover:to-rose-700 transition-colors duration-300" 
               >
                 No
               </button>
             </div>
           </div>
         </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

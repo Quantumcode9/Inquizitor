@@ -1,40 +1,39 @@
 [
-
   {
     "type": 1,
-    "statement": "I hold myself to very high standards and always strive to do what is right and ethical."
+    "statement": "I feel a strong duty to fix what's wrong and hold myself to high moral standards."
   },
   {
     "type": 2,
-    "statement": "I feel most fulfilled when I am helping others, often putting their needs above my own."
+    "statement": "I feel valued when I'm needed by others and often put their needs above my own."
   },
   {
     "type": 3,
-    "statement": "I am driven to succeed and often focus on how others perceive my accomplishments."
+    "statement": "I strive to succeed and want to be seen as capable and accomplished."
   },
   {
     "type": 4,
-    "statement": "I often feel different from others and express myself in unique and creative ways."
+    "statement": "I often feel different from others and want to be seen as unique and authentic."
   },
   {
     "type": 5,
-    "statement": "I value my privacy and spend a lot of time observing and analyzing the world around me."
+    "statement": "I prefer solitude to recharge and enjoy analyzing ideas deeply and independently."
   },
   {
     "type": 6,
-    "statement": "I am often anxious and seek security by being loyal and responsible in my relationships and commitments."
+    "statement": "I seek security through loyalty and often worry about what could go wrong."
   },
   {
     "type": 7,
-    "statement": "I love seeking out new, exciting experiences and sometimes struggle with staying focused."
+    "statement": "I chase exciting experiences and avoid feeling trapped in boredom or emotional pain."
   },
   {
     "type": 8,
-    "statement": "I am confident and assertive, often taking control of situations to make sure things are done correctly."
+    "statement": "I assert myself to stay in control and protect myself and others from being vulnerable."
   },
   {
     "type": 9,
-    "statement": "I strive to keep the peace and often go along with others to avoid conflict."
+    "statement": "I avoid conflict by going along with others, even at the cost of my own preferences."
   }
 ]
 

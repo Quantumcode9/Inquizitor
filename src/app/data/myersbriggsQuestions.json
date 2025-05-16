@@ -170,9 +170,9 @@
 },
 
 {
-    "question": "Do you tend to feel more fulfilled by:",
-    "optionA": "Achieving concrete results and accomplishments",
-    "optionB": "Building connections and helping others feel good",
+    "question": "For you, the most important aspect of a decision is:",
+    "optionA": "The logical reasoning behind it",
+    "optionB": "The emotional impact it has on others",
     "type": "T vs F"
 },
 
